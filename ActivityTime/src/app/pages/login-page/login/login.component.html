@@ -1,0 +1,7 @@
+<div id="LoginPageContainer">
+    <div id="Title">ActivityTime</div>
+    <app-textfield-email  [placeholder]="'Insert Email'" ></app-textfield-email>
+    <app-textfield-psw  [placeholder]="'Insert Password'" ></app-textfield-psw>
+    <app-custom-button id="buttonLogin" (click)="onClickFunction()" [buttonText]="'Login'"></app-custom-button>
+    <div id="Redirect" routerLink="/register" >Se non hai ancora un account, clicca Qui</div>
+</div>

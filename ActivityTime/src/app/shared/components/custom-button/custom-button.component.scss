@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+}
+
+#ButtonContainer{
+    position: relative;
+    width: 100%;
+    background: cornflowerblue;
+    display: flex;
+    justify-content: center;
+    border-radius: 100px;
+}
+
+#ButtonContainer:hover{
+    transform: translateY(-8px);
+    cursor: pointer;
+    box-shadow: 3px 6px grey;
+    transition: transform 0.5s ease-in-out;
+}
+
+#ButtonContainer:not(:hover){
+    transform: translateY(0px);
+    cursor: pointer;
+    
+    transition: transform 0.5s ease-in-out;
+}
+
+button{
+    background: transparent;
+    color: white;
+    font-size: 30px;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 700px){
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        font-family: 'Poppins',sans-serif;
+    }
+    
+    #ButtonContainer{
+        position: relative;
+        width: 100%;
+        background: cornflowerblue;
+        display: flex;
+        justify-content: center;
+        border-radius: 100px;
+    }
+    
+    #ButtonContainer:hover{
+        transform: translateY(-10px);
+        cursor: pointer;
+        box-shadow: 3px 6px grey;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    #ButtonContainer:not(:hover){
+        transform: translateY(0px);
+        cursor: pointer;
+        
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    button{
+        background: transparent;
+        color: white;
+        font-size: 30px;
+        border: none;
+        padding: 10px;
+        font-weight: bold;
+    }
+    
+    button:hover{
+        cursor: pointer;
+    }
+    
+}
+
+@media only screen and (min-width: 1000px){
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        font-family: 'Poppins',sans-serif;
+    }
+    
+    #ButtonContainer{
+        position: relative;
+        width: 100%;
+        background: cornflowerblue;
+        display: flex;
+        justify-content: center;
+        border-radius: 100px;
+    }
+    
+    #ButtonContainer:hover{
+        transform: translateY(-20px);
+        cursor: pointer;
+        box-shadow: 3px 6px grey;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    #ButtonContainer:not(:hover){
+        transform: translateY(0px);
+        cursor: pointer;
+        
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    button{
+        background: transparent;
+        color: white;
+        font-size: 30px;
+        border: none;
+        padding: 10px;
+        font-weight: bold;
+    }
+    
+    button:hover{
+        cursor: pointer;
+    }
+    
+}
+
+

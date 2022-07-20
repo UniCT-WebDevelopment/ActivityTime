@@ -1,0 +1,90 @@
+*{
+    padding-bottom: 5%;
+    width: 90%;
+}
+
+#LoginPageContainer{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+#Title{
+    position: relative;
+    color: cornflowerblue;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    padding-top: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#Redirect{
+    position: relative;
+    color: cornflowerblue;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    width: 100%;
+    font-style: bold;
+    text-decoration: underline;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#Redirect:hover{
+    cursor:pointer;
+}
+
+#buttonRegister{
+    width: 60%;
+}
+
+
+
+@media only screen and (min-width: 700px){
+    *{
+        padding-bottom: 3%;
+        width: 60%;
+    }
+    
+    #LoginPageContainer{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #buttonRegister{
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 1000px){
+    *{
+        padding-bottom: 3%;
+        width: 35%;
+    }
+    
+    #LoginPageContainer{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #buttonRegister{
+        width: 20%;
+    }
+}
+
+
+
+
+
+
+
+
