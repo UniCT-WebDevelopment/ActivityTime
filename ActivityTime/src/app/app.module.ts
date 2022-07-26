@@ -8,6 +8,7 @@ import { TextfieldEmailComponent } from './shared/components/textfield-email/tex
 import { TextfieldTextComponent } from './shared/components/textfield-text/textfield-text.component';
 import { TextfieldNumComponent } from './shared/components/textfield-num/textfield-num.component';
 import { TextfieldNumDComponent } from './shared/components/textfield-num-d/textfield-num-d.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TextfieldNumDComponent } from './shared/components/textfield-num-d/text
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

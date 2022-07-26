@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
+import { ApiService } from 'src/app/shared/services/api-services/api.service';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,7 @@ export class RegisterComponent implements OnInit {
   emailHTML : Element;
   passwordHTML : Element;
 
-  constructor() {
+  constructor(private apiService : ApiService, private router : Router) {
     this.nameHTML = document.getElementsByTagName("app-textfield-text")[0];
     this.surnameHTML = document.getElementsByTagName("app-textfield-text")[1];
     this.emailHTML = document.getElementsByTagName("app-textfield-email")[0];
@@ -33,7 +35,22 @@ export class RegisterComponent implements OnInit {
     var checkEmail: Boolean = this.validationEmail();
     var checkPassword : Boolean = this.validationPassword();
     if(checkName && checkSurname && checkEmail && checkPassword){
-      //Call API for register user
+      var data : Map<String,any> = new Map<String,any>;
+      var name : string = this.nameHTML.getElementsByTagName("input")[0].value.toString();
+      var surname : string = this.surnameHTML.getElementsByTagName("input")[0].value.toString();
+      var email : string = this.emailHTML.getElementsByTagName("input")[0].value.toString();
+      var psw : string = this.passwordHTML.getElementsByTagName("input")[0].value.toString();
+      data.set("name",name)
+      data.set("surname",surname)
+      data.set("email",email)
+      data.set("password",psw)
+      this.apiService.sendData(data).subscribe((response) => {
+        if(response["resp"] == "OK"){
+          //Redirect To Login
+          this.router.navigate(["/login"])
+        }
+      })
+      
     }
     
   }
