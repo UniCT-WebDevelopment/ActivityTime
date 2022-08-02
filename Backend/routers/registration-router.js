@@ -14,7 +14,9 @@ var con = mysql.createConnection({
     console.log("Connected!");
   });
 
+
 router.post("/registration",(req,res) => {
+    
     console.log("/api/registration triggered");
     if(req.body.name == undefined || req.body.name == ""){
         res.send({resp:"DENY"})

@@ -6,6 +6,8 @@ import { TextfieldEmailComponent } from 'src/app/shared/components/textfield-ema
 import { TextfieldPswComponent } from 'src/app/shared/components/textfield-psw/textfield-psw.component';
 import { TextfieldTextComponent } from 'src/app/shared/components/textfield-text/textfield-text.component';
 import { SharedComponentsModule } from 'src/app/shared/components/components.module';
+import { AppComponent } from 'src/app/app.component';
+
 
 
 

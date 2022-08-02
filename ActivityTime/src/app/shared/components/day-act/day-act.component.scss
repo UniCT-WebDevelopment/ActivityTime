@@ -1,0 +1,27 @@
+#PanelDayAct{
+    display: flex;
+    background-color: cornflowerblue;
+    opacity: 0.4;
+    border-radius: 30px;
+    height: 250px;
+    width: 250px;
+    box-shadow:
+       inset 0 -3em 3em rgba(0, 0, 0, 0.0),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0, 0, 0, 1);
+}
+
+#DayTextContainer{
+    position:relative;
+    top: 15px;
+    left: 15px;
+}
+
+#DayText{
+    color: white;
+    display: flex;
+    font-size: 30px;
+    font-weight: bold;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;  
+}

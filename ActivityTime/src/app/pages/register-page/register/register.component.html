@@ -1,9 +1,9 @@
 <div id="LoginPageContainer">
     <div id="Title">Registration</div>
-    <app-textfield-text [placeholder]="'Insert Name'"></app-textfield-text>
-    <app-textfield-text [placeholder]="'Insert Surname'"></app-textfield-text>
-    <app-textfield-email  [placeholder]="'Insert Email'" ></app-textfield-email>
-    <app-textfield-psw  [placeholder]="'Insert Password'" ></app-textfield-psw>
+    <app-textfield-text id="RegistrationNameTextfield" [placeholder]="'Insert Name'"></app-textfield-text>
+    <app-textfield-text id="RegistrationSurnameTextfield" [placeholder]="'Insert Surname'"></app-textfield-text>
+    <app-textfield-email id="RegistrationEmailTextfield" [placeholder]="'Insert Email'" ></app-textfield-email>
+    <app-textfield-psw id="RegistrationPasswordTextfield" [placeholder]="'Insert Password'" ></app-textfield-psw>
     <app-custom-button id="buttonRegister" (click)="onClickFunction()" [buttonText]="'Register'"></app-custom-button>
-    <div id="Redirect" routerLink="/login" >Permi qui per tornare al login!</div>
+    <div id="Redirect" routerLink="/login" >Return to login!</div>
 </div>

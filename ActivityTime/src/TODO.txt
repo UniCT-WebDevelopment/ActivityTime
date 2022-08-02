@@ -1,0 +1,5 @@
+1) Compeltare graficamente il login OK
+2) mostra nel login tutto rosso se l'accesso non va a buon fine
+3) Completare dati delle notification nel Database
+4) Inserisci una data vera per fare il compare nelle activity
+5) Iniziare Home

@@ -29,7 +29,7 @@
     display: flex;
     justify-content: center;
     font-size: 15px;
-    width: 100%;
+    padding: 0px;
     font-style: bold;
     text-decoration: underline;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -42,7 +42,6 @@
 #buttonRegister{
     width: 60%;
 }
-
 
 
 @media only screen and (min-width: 700px){

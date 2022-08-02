@@ -9,7 +9,15 @@ const routes: Routes = [
   {
     path: "register",
     loadChildren: () => import("./pages/register-page/register-page.module").then((module) => module.RegisterPageModule)
-  }
+  },
+  {
+    path: "home",
+    loadChildren: () => import("./pages/home-page/home-page.module").then((module) => module.HomePageModule),
+  },
+  {
+    path: "**",
+    loadChildren: () => import("./pages/login-page/login-page.module").then((module) => module.LoginPageModule)
+  },
 ];
 
 @NgModule({

@@ -25,7 +25,6 @@
 #ButtonContainer:not(:hover){
     transform: translateY(0px);
     cursor: pointer;
-    
     transition: transform 0.5s ease-in-out;
 }
 

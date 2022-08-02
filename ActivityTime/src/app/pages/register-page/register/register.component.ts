@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
 import { ApiService } from 'src/app/shared/services/api-services/api.service';
 import {Router} from "@angular/router"
+import { delay } from 'rxjs';
+import { LoadingService } from 'src/app/shared/services/loading-services/loading.service';
 
 @Component({
   selector: 'app-register',
@@ -14,18 +16,18 @@ export class RegisterComponent implements OnInit {
   emailHTML : Element;
   passwordHTML : Element;
 
-  constructor(private apiService : ApiService, private router : Router) {
-    this.nameHTML = document.getElementsByTagName("app-textfield-text")[0];
-    this.surnameHTML = document.getElementsByTagName("app-textfield-text")[1];
-    this.emailHTML = document.getElementsByTagName("app-textfield-email")[0];
-    this.passwordHTML = document.getElementsByTagName("app-textfield-psw")[0];
+  constructor(private apiService : ApiService, private router : Router,private loadingService : LoadingService) {
+    this.nameHTML = document.getElementById("RegistrationNameTextfield");
+    this.surnameHTML = document.getElementById("RegistrationSurnameTextfield");
+    this.emailHTML = document.getElementById("RegistrationEmailTextfield");
+    this.passwordHTML = document.getElementById("RegistrationPasswordTextfield");
   }
 
   ngOnInit(): void {
-    this.nameHTML = document.getElementsByTagName("app-textfield-text")[0];
-    this.surnameHTML = document.getElementsByTagName("app-textfield-text")[1];
-    this.emailHTML = document.getElementsByTagName("app-textfield-email")[0];
-    this.passwordHTML = document.getElementsByTagName("app-textfield-psw")[0];
+    this.nameHTML = document.getElementById("RegistrationNameTextfield");
+    this.surnameHTML = document.getElementById("RegistrationSurnameTextfield");
+    this.emailHTML = document.getElementById("RegistrationEmailTextfield");
+    this.passwordHTML = document.getElementById("RegistrationPasswordTextfield");
   }
 
 
@@ -42,11 +44,17 @@ export class RegisterComponent implements OnInit {
       var psw : string = this.passwordHTML.getElementsByTagName("input")[0].value.toString();
       data.set("name",name)
       data.set("surname",surname)
-      data.set("email",email)
+      data.set("email",email.toLowerCase())
       data.set("password",psw)
-      this.apiService.sendData(data).subscribe((response) => {
+      this.loadingService.show()
+      this.apiService.RegistrationAPI(data)
+      .pipe(
+        delay(2000)
+      )
+      .subscribe((response) => {
         if(response["resp"] == "OK"){
           //Redirect To Login
+          this.loadingService.hide()
           this.router.navigate(["/login"])
         }
       })
@@ -112,7 +120,7 @@ export class RegisterComponent implements OnInit {
     var container : Element = this.passwordHTML.getElementsByTagName("div")[0];
     if(psw.length>15 || psw.length < 8 ){
       container.className = "invalid";
-      console.log("lunghezza burtta");
+      console.log("psw : " + psw);
       return false;
     }
 
