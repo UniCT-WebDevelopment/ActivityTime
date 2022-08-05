@@ -1,0 +1,9 @@
+<div class="activityContainer">
+    <span class="time">{{time}}</span>
+    <div (click)="EmitActivityInfo()" class="activity" id="activityID" [ngStyle]="getBackground()">
+        <div class="titleContainer">
+            <span class="title" id="activityTitle">{{type[0]}}</span>
+        </div>
+        
+    </div>
+</div>

@@ -19,7 +19,7 @@ con.connect(function (err) {
 
 
 router.post("/activities", (req, res) => {
-    var query_getAllUserActivity = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM users JOIN usrXact ON users.email = usrXact.cod_usr JOIN Activities ON usrXact.cod_act = Activities.id WHERE usrXact.cod_usr = ?";
+    var query_getAllUserActivity = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM users JOIN usrXact ON users.email = usrXact.cod_usr JOIN Activities ON usrXact.cod_act = Activities.id WHERE usrXact.cod_usr = ? ORDER BY time_start";
     var x = 0;
     var activities = []
 
@@ -54,7 +54,7 @@ router.post("/activities", (req, res) => {
 })
 
 router.post("/activitiesFounder", (req, res) => {
-    var query_getAllUserActivityFounder = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM Activities WHERE cod_founder = ?";
+    var query_getAllUserActivityFounder = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM Activities WHERE cod_founder = ?  ORDER BY time_start";
     var x = 0;
     var activities = []
 

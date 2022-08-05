@@ -1,50 +1,70 @@
 <div id="HomePageContainer">
     <div id="Title">ActivityTime</div>
+    <div class="activityManager">
+        <div class="containerActivity">
+            <div class="activityPublic">
+                <div class="titleContainer">
+                    <span class="title" id="activityTitle">P</span>
+                </div>
+                
+            </div>
+            <span>Public</span>
+        </div>
+        <div class="containerActivity">
+            <div class="activityRestricted">
+                <div class="titleContainer">
+                    <span class="title" id="activityTitle">P</span>
+                </div>
+                
+            </div>
+            <span>Restricted</span>
+        </div>
+        <div class="containerActivity">
+            <div class="activityPrivate">
+                <div class="titleContainer">
+                    <span class="title" id="activityTitle">P</span>
+                </div>
+                
+            </div>
+            <span>Private</span>
+        </div>
+        <div class="containerAddActivityButton">
+            <mat-icon class="iconAddActivity">add_circle_outline</mat-icon>
+        </div>
+
+    </div>
     <div id="UserDetails">
-        <img id="UserImage" src="/assets/user-photo/user-photo-default.png" alt="none">
+        <img id="UserImage" src="/assets/user-photo/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" alt="none">
         <span class="UserDetailsText">Name</span>
         <span class="UserDetailsText">Surname</span>
     </div>
 
     <div id="SliderMonth">
-        <div id="prevContainer">
+        <div id="prevContainer" (click)="prevContainerOnClick()">
             <div class="arrows prev"></div>
         </div>
-        <div id="MonthInfo">Gennaio</div>
-        <div id="nextContainer">
-            <div class="arrows next"></div> 
+        <div id="MonthInfo">{{currentMonthString}}</div>
+        <div id="nextContainer" (click)="nextContainerOnClick()">
+            <div class="arrows next"></div>
         </div>
     </div>
+    
 
     <div id="PanelMonthAct">
-        <div class="RowPanelMonthAct">
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-        </div>
-
-        <div class="RowPanelMonthAct">
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-        </div>
-
-        <div class="RowPanelMonthAct">
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-            <app-day-act></app-day-act>
-        </div>
-
-        <div class="RowPanelMonthAct">
-            <app-day-act></app-day-act>
-        </div>
-    
+        <ng-container *ngFor="let item of onChangeMonthList">
+            <app-day-act [day]="item.toString()" [activityListInput]="monthsActivities[currentMonthNumber]" (emitter)="ActivityInfoTrigger($event)"></app-day-act>
+        </ng-container>
     </div>
-    
+    <router-outlet></router-outlet>
+</div>
+
+
+<app-side-menu></app-side-menu>
+
+<div id="infoActivity" [ngClass]="showActivityInfo ? 'infoActivityShow' : 'infoActivityNotShow'">
+    <div id="infoContainer">
+        <div class="exitActivityInfoIcon">
+            <mat-icon (click)="closeActivityInfoPanel()">cancel</mat-icon>
+        </div>
+    </div>
 </div>

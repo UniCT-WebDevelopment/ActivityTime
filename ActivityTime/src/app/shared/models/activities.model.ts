@@ -7,7 +7,7 @@ export class Activities{
     ID : Number;
     title : String
     description : String
-    date : String
+    date : Date
     timeStart : String
     timeEnd : String
     city : String
@@ -18,13 +18,13 @@ export class Activities{
     //Session Data
     participants : UserPartecipant[]
 
-    constructor(ID : Number, title : String, description : String, date : String, timeStart : String, timeEnd : String, city : String , address : String, founder : UserFriend, partecipants : UserPartecipant[],type : String){
+    constructor(ID : Number, title : String, description : String, date : Date, timeStart : String, timeEnd : String, city : String , address : String, founder : UserFriend, partecipants : UserPartecipant[],type : String){
         this.ID = ID
         this.title = title
         this. description = description
         this.date = date
-        this.timeStart = timeStart
-        this.timeEnd = timeEnd
+        this.timeStart = timeStart.substring(0,5)
+        this.timeEnd = timeEnd.substring(0,5)
         this.city = city
         this.address = address
         this.founder = founder

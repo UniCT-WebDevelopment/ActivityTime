@@ -1,7 +1,12 @@
 <div id="PanelDayAct">
 
     <div id="DayTextContainer">
-        <span id="DayText">27</span> 
+        <span id="DayText">{{day}}</span> 
+    </div>
+    <div id="ActivityListContainer" >
+        <ng-container *ngFor="let item of activityList">
+            <app-activity (emitter)="EmitDataActivity($event)" [type]="item.type" [id]=item.id [time]="item.time"></app-activity>
+        </ng-container>
     </div>
     
 </div>

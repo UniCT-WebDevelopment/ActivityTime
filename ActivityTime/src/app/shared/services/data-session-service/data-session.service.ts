@@ -50,7 +50,7 @@ export class DataSessionService {
                   let ID : Number = response["resp"]["activities"][i]["id"];
                   let title : String = response["resp"]["activities"][i]["title"];
                   let description : String = response["resp"]["activities"][i]["description"];
-                  let date : String = response["resp"]["activities"][i]["date"];
+                  let date : Date = new Date(response["resp"]["activities"][i]["date"])
                   let timeStart : String = response["resp"]["activities"][i]["time_start"];
                   let timeEnd : String = response["resp"]["activities"][i]["time_end"];
                   let city : String = response["resp"]["activities"][i]["city"];
@@ -138,7 +138,7 @@ export class DataSessionService {
                               let ID : Number = response["resp"]["activities"][i]["id"];
                               let title : String = response["resp"]["activities"][i]["title"];
                               let description : String = response["resp"]["activities"][i]["description"];
-                              let date : String = response["resp"]["activities"][i]["date"];
+                              let date : Date = new Date(response["resp"]["activities"][i]["date"])
                               let timeStart : String = response["resp"]["activities"][i]["time_start"];
                               let timeEnd : String = response["resp"]["activities"][i]["time_end"];
                               let city : String = response["resp"]["activities"][i]["city"];
@@ -209,7 +209,7 @@ export class DataSessionService {
                   let ID : Number = response["resp"]["activities"][i]["id"];
                   let title : String = response["resp"]["activities"][i]["title"];
                   let description : String = response["resp"]["activities"][i]["description"];
-                  let date : String = response["resp"]["activities"][i]["date"];
+                  let date : Date = new Date(response["resp"]["activities"][i]["date"])
                   let timeStart : String = response["resp"]["activities"][i]["time_start"];
                   let timeEnd : String = response["resp"]["activities"][i]["time_end"];
                   let city : String = response["resp"]["activities"][i]["city"];
@@ -297,7 +297,7 @@ export class DataSessionService {
                                 let ID : Number = response["resp"]["activities"][i]["id"];
                                 let title : String = response["resp"]["activities"][i]["title"];
                                 let description : String = response["resp"]["activities"][i]["description"];
-                                let date : String = response["resp"]["activities"][i]["date"];
+                                let date : Date = new Date(response["resp"]["activities"][i]["date"])
                                 let timeStart : String = response["resp"]["activities"][i]["time_start"];
                                 let timeEnd : String = response["resp"]["activities"][i]["time_end"];
                                 let city : String = response["resp"]["activities"][i]["city"];

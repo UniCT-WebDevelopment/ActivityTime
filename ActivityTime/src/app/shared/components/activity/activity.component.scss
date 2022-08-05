@@ -1,0 +1,67 @@
+.activity{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: orange;
+    border: 2px solid black;
+    
+}
+.activityContainer{
+    width: 19%;
+    height: 19%;
+    display: inline-block;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 4px;
+}
+.time{
+    position: relative;
+    left: 1px;
+    
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    font-size: 1.8vh;
+    font-style: italic;
+    
+
+}
+.activityContainer:hover{
+    .time{
+        z-index: 150;
+        color:gold;
+        text-decoration: underline;
+    }
+    cursor: pointer;
+    transform: scale(1.3);
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    z-index: 150;
+}
+.activityContainer:not(:hover){
+    transform: scale(1);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    z-index: 0;
+    
+}
+
+.titleContainer{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    color: black;
+    font-size: 3vh;
+    font-weight: bold;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

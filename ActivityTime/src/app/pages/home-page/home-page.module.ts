@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomeComponent } from './home/home.component';
 import { SharedComponentsModule } from 'src/app/shared/components/components.module';
+import { RouterOutlet } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { SharedComponentsModule } from 'src/app/shared/components/components.mod
   imports: [
     CommonModule,
     HomePageRoutingModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    MatIconModule
+    
   ]
 })
 export class HomePageModule { }

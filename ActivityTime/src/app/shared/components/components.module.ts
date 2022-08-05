@@ -18,6 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 import { SpinnerService } from '../services/loading-services/spinner.service';
 import { DayActComponent } from './day-act/day-act.component';
+import { ActivityComponent } from './activity/activity.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+
 
 
 
@@ -27,17 +30,18 @@ import { DayActComponent } from './day-act/day-act.component';
 
 @NgModule({
   declarations: [
-  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent
+  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent, ActivityComponent, SideMenuComponent
   ],
   imports: [
     CommonModule, 
     FormsModule,
     MatButtonModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   exports:[
-    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent
+    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent,ActivityComponent,SideMenuComponent
   ]
 })
 export class SharedComponentsModule {}

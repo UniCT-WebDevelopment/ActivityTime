@@ -6,8 +6,8 @@ import { User } from '../../models/user.model';
  
 @Injectable({providedIn:'root'})
 export class ApiService {
-  baseURL: string = "http://192.168.1.7:9000/";
-  baseApiURL: string = "http://192.168.1.7:9000/api/";
+  baseURL: string = "http://192.168.1.3:9000/";
+  baseApiURL: string = "http://192.168.1.3:9000/api/";
  
   constructor(private http: HttpClient) {
   }

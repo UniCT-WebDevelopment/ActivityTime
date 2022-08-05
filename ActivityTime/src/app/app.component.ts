@@ -18,10 +18,6 @@ export class AppComponent {
     
   }
 
-  ResetToken(){
-    console.log("Tokene reset")
-    localStorage.removeItem("token")
-  }
   
 
   title = 'ActivityTime';
