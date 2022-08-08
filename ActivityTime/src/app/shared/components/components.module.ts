@@ -20,6 +20,7 @@ import { SpinnerService } from '../services/loading-services/spinner.service';
 import { DayActComponent } from './day-act/day-act.component';
 import { ActivityComponent } from './activity/activity.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+import { TextFiledAddActTextComponent } from './text-filed-add-act-text/text-filed-add-act-text.component';
 
 
 
@@ -30,7 +31,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
-  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent, ActivityComponent, SideMenuComponent
+  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent, ActivityComponent, SideMenuComponent, TextFiledAddActTextComponent
   ],
   imports: [
     CommonModule, 
@@ -41,7 +42,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
     MatIconModule
   ],
   exports:[
-    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent,ActivityComponent,SideMenuComponent
+    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent,ActivityComponent,SideMenuComponent, TextFiledAddActTextComponent
   ]
 })
 export class SharedComponentsModule {}

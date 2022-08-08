@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Activities } from 'src/app/shared/models/activities.model';
 import { UserFriend } from 'src/app/shared/models/user-friend.model';
+import { User } from 'src/app/shared/models/user.model';
 import { ApiService } from 'src/app/shared/services/api-services/api.service';
 import { DataSessionService } from 'src/app/shared/services/data-session-service/data-session.service';
 
@@ -23,6 +24,10 @@ export class HomeComponent implements OnInit {
   onChangeMonthList = []
   onChangeActivityList = []
   showActivityInfo : Boolean = false
+  showAddActivity : Boolean = false
+  activityDataModel : Activities = new Activities(0,"","",new Date(),"","","","",new UserFriend("","","",""),[],"")
+  activityUserListModel : UserFriend[] = []
+  time = {hour: 13, minute: 30};
   
 
   constructor(private apiService : ApiService,private router : Router,private dataSessionService : DataSessionService, private changeDetector: ChangeDetectorRef) {
@@ -145,11 +150,25 @@ export class HomeComponent implements OnInit {
   ActivityInfoTrigger(activity : Activities){
     //Keep attention, it's reference not original
     this.showActivityInfo=true
-    console.log("nella home è arrivato: ")
-    console.log(activity)
+    this.activityDataModel = activity
+    this.activityUserListModel = []
+    for(let user of activity.participants){
+      this.activityUserListModel.push(user)
+    }
+    console.log(this.activityUserListModel)
   }
   closeActivityInfoPanel(){
     this.showActivityInfo=false
+  }
+
+  OpenAddActivityPanel(){
+    this.showAddActivity = true
+    
+    
+  }
+  closeAddActivityPanel(){
+    this.showAddActivity = false
+    
   }
 
   async delay(ms: number) {

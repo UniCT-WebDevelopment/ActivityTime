@@ -6,8 +6,8 @@
     left: 0px;
     height: 100%;
     width: 120px;
-    background-color: cornflowerblue;
-    opacity: 0.6;
+    opacity: 1;
+    margin-bottom: 10px;
 }
 
 #sideMenu:hover{
@@ -24,6 +24,9 @@
     .iconsContainer{
         transform: translateX(0);
         transition: transform 0.3s ease-in-out;
+    }
+    .menuIcon{
+        background-color: white;
     }
     
 }
@@ -56,7 +59,7 @@
 .menuIcon{
     width: 40%;
     height: 8px;
-    background-color: white;
+    background-color: cornflowerblue;
     margin-top: 6px;
     
 }
@@ -73,4 +76,88 @@
 .icon{
     margin-top: 70px;
     transform: scale(2.5);
+}
+@media only screen and (min-width: 500px){
+    #sideMenu{
+        display: flex;
+        flex-direction:column;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 120px;
+        background-color: cornflowerblue;
+        opacity: 0.6;
+    }
+    
+    #sideMenu:hover{
+        background-color: cornflowerblue;
+        opacity: 1;
+        transform: translateX(0px);
+        transition: transform 0.3s ease-in-out;
+        transform-origin: right;
+        cursor: pointer;
+        #menuIconContainer{
+            transform: translateX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+        .iconsContainer{
+            transform: translateX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+        .menuIcon{
+            background-color: white;
+        }
+        
+    }
+    
+    #sideMenu:not(:hover){
+        transform: translateX(-60px);
+        cursor: pointer;
+        transform-origin: right;
+        transition: transform 0.3s ease-in-out;
+        z-index: 0;
+        #menuIconContainer{
+            transform: translateX(30);
+            transition: transform 0.3s ease-in-out;
+        }
+        .iconsContainer{
+            transform: translateX(-100px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .menuIcon{
+            background-color: white;
+        }
+        
+    }
+    
+    #menuIconContainer{
+        width: 100%;
+        margin-top: 18px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        transform: translateX(29px);
+    }
+    .menuIcon{
+        width: 40%;
+        height: 8px;
+        background-color: white;
+        margin-top: 6px;
+        
+    }
+    
+    .iconsContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: left;
+        margin-left: 50px;
+        color: white;
+    }
+    
+    .icon{
+        margin-top: 70px;
+        transform: scale(2.5);
+    }
 }

@@ -13,7 +13,7 @@
         <div class="containerActivity">
             <div class="activityRestricted">
                 <div class="titleContainer">
-                    <span class="title" id="activityTitle">P</span>
+                    <span class="title" id="activityTitle">R</span>
                 </div>
                 
             </div>
@@ -22,14 +22,14 @@
         <div class="containerActivity">
             <div class="activityPrivate">
                 <div class="titleContainer">
-                    <span class="title" id="activityTitle">P</span>
+                    <span class="title" id="activityTitle">PR</span>
                 </div>
                 
             </div>
             <span>Private</span>
         </div>
         <div class="containerAddActivityButton">
-            <mat-icon class="iconAddActivity">add_circle_outline</mat-icon>
+            <mat-icon (click)="OpenAddActivityPanel()" class="iconAddActivity">add_circle_outline</mat-icon>
         </div>
 
     </div>
@@ -65,6 +65,90 @@
     <div id="infoContainer">
         <div class="exitActivityInfoIcon">
             <mat-icon (click)="closeActivityInfoPanel()">cancel</mat-icon>
+        </div>
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">Title</span>
+            <div class="infoActivityRowData">{{activityDataModel.title + "  (" + activityDataModel.type + ")" }}</div>
+        </div>
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">Description</span>
+            <div class="infoActivityRowData">{{activityDataModel.description}}</div>
+        </div>
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">City</span>
+            <div class="infoActivityRowData">{{activityDataModel.city}}</div>
+        </div>
+
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">Address</span>
+            <div class="infoActivityRowData">{{activityDataModel.address}}</div>
+        </div>
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">Date</span>
+            <div class="infoActivityRowData">{{activityDataModel.date.getDate() + " - " +(activityDataModel.date.getMonth()+1) + " - "+ activityDataModel.date.getFullYear()}}</div>
+        </div>
+
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">Time Start - Time End</span>
+            <div class="infoActivityRowData">{{activityDataModel.timeStart + " - " + activityDataModel.timeEnd}}</div>
+        </div>
+
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">Founder Data</span>
+            <div class="infoActivityRowData"><b>Name: </b>{{activityDataModel.founder.name}}</div>
+            <div class="infoActivityRowData"><b>Surname: </b>{{activityDataModel.founder.surname}}</div>
+            <div class="infoActivityRowData"><b>Email: </b>{{activityDataModel.founder.email}}</div>
+        </div>
+        
+
+        <div class="infoActivityRow">
+            <span class="infoActivityRowTitle">Partecipants List</span>
+            <div *ngFor="let data of activityUserListModel">
+                <br>
+                <b>({{activityUserListModel.indexOf(data)+1}})</b>
+                <div class="infoActivityRowData"><b>Name: </b>{{data.name}}</div>
+                <div class="infoActivityRowData"><b>Surname: </b>{{data.surname}}</div>
+                <div class="infoActivityRowData"><b>Email: </b>{{data.email}}</div>
+            </div>
+            
+        </div>
+    
+
+        
+
+    </div>
+</div>
+
+<div id="addActivity" [ngClass]="showAddActivity ? 'addActivityShow' : 'addActivityNotShow'">
+    <div id="addActivityContainer">
+        <div class="exitAddActivityIcon">
+            <mat-icon (click)="closeAddActivityPanel()">cancel</mat-icon>
+        </div>
+        <div class="inputDataActiviy">
+            <app-text-filed-add-act-text id="newActivityTitle" [placeholder]="'Title'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityDescription" [placeholder]="'Description'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityCity" [placeholder]="'Date'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityAddress" [placeholder]="'TimeStart'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityType" [placeholder]="'Type'"></app-text-filed-add-act-text>
+            
+            
+            <div id="dataPicker"> 
+                <mat-form-field color="accent" appearance="fill">
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker1">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+                <hr>
+                <pre>Selected time: {{time | json}}</pre>
+
+                Increment hours
+
+            <app-text-filed-add-act-text id="newActivityTimeStart" [placeholder]="'TimeStart'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityTimeEnd" [placeholder]="'TimeEnd'"></app-text-filed-add-act-text>
         </div>
     </div>
 </div>

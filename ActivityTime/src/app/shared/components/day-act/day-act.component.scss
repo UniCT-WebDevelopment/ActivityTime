@@ -3,8 +3,8 @@
     background-color: cornflowerblue;
     opacity: 0.7;
     border-radius: 30px;
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     display: inline-block;
     box-shadow:
        inset 0 -3em 3em rgba(0, 0, 0, 0.0),
@@ -12,24 +12,23 @@
              0.3em 0.3em 1em rgba(0, 0, 0, 1);
              
 
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     
     
 }
-
 #DayTextContainer{
     position:relative;
     left: 7%;
     margin-top: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 
 #DayText{
     position: relative;
     color: white;
     display: flex;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     align-items: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;  
@@ -39,7 +38,7 @@
     
     margin-left: 3%;
     overflow: scroll;
-    height: 76%;
+    height: 70%;
     width: 96%;
     
 }
@@ -47,8 +46,64 @@
     display: none;
 }
 #ActivityListContainer app-activity{
-    margin-left: 3px;
+    margin-left: 1px;
     
 }
 
-
+@media only screen and (min-width: 500px){
+    #PanelDayAct{
+        position: relative;
+        background-color: cornflowerblue;
+        opacity: 0.7;
+        border-radius: 30px;
+        height: 200px;
+        width: 200px;
+        display: inline-block;
+        box-shadow:
+           inset 0 -3em 3em rgba(0, 0, 0, 0.0),
+                 0 0  0 2px rgb(255,255,255),
+                 0.3em 0.3em 1em rgba(0, 0, 0, 1);
+                 
+    
+        margin-top: 20px;
+        margin-bottom: 20px;
+        
+        
+    }
+    
+    #DayTextContainer{
+        position:relative;
+        left: 7%;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    
+    #DayText{
+        position: relative;
+        color: white;
+        display: flex;
+        font-size: 30px;
+        font-weight: bold;
+        align-items: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;  
+    }
+    
+    #ActivityListContainer{
+        
+        margin-left: 3%;
+        overflow: scroll;
+        height: 76%;
+        width: 96%;
+        
+    }
+    #ActivityListContainer::-webkit-scrollbar {
+        display: none;
+    }
+    #ActivityListContainer app-activity{
+        margin-left: 3px;
+        
+    }
+    
+    
+    
+}

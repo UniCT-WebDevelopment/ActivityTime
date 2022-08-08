@@ -13,6 +13,8 @@ import { NetworkInterceptor } from './shared/services/network.interceptor';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { SharedComponentsModule } from './shared/components/components.module';
 import { DataSessionService } from './shared/services/data-session-service/data-session.service';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 
@@ -26,7 +28,9 @@ import { DataSessionService } from './shared/services/data-session-service/data-
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    MatNativeDateModule,
+    
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true },DataSessionService],
   bootstrap: [AppComponent]
