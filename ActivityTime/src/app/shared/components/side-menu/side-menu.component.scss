@@ -8,6 +8,7 @@
     width: 120px;
     opacity: 1;
     margin-bottom: 10px;
+    
 }
 
 #sideMenu:hover{
@@ -17,6 +18,7 @@
     transition: transform 0.3s ease-in-out;
     transform-origin: right;
     cursor: pointer;
+    z-index: 15;
     #menuIconContainer{
         transform: translateX(0);
         transition: transform 0.3s ease-in-out;
@@ -47,6 +49,7 @@
     }
     
 }
+
 
 #menuIconContainer{
     width: 100%;

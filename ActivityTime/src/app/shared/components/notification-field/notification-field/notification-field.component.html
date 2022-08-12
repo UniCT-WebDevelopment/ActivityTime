@@ -1,0 +1,47 @@
+<div>
+    <div class="phoneIcon" *ngIf="requestType == 'friend_request'">
+        <mat-icon class="iconNoOversize">group_add</mat-icon>
+    </div>
+    <div class="phoneIcon" *ngIf="requestType == 'invite_request'">
+        <mat-icon class="iconNoOversize">add_location</mat-icon>
+    </div>
+    <div id="icon1Desk" class="column" *ngIf="requestType == 'friend_request'">
+        <mat-icon class="iconNoOversize">group_add</mat-icon>
+    </div>
+    <div id="icon2Desk" class="column" *ngIf="requestType == 'invite_request'">
+        <mat-icon class="iconNoOversize">add_location</mat-icon>
+    </div>
+    <div class="column">
+        <span >Type</span>
+        <span class="data">{{requestType}}</span>
+    </div>
+    <div class="column" style="margin-right: 30px;">
+        <span>From</span>
+        <span class="data">{{fromName}} {{fromSurname}}</span>
+    </div>
+    <div class="column" style="width: 30%;" *ngIf="requestType == 'invite_request'">
+        <span>ActivityTitle</span>
+        <span class="data">{{activityTitle}}</span>
+    </div>
+    <div class="column" *ngIf="requestType == 'invite_request'">
+        <span>Date</span>
+        <span class="data">{{activityDate.getDate()}}-{{activityDate.getMonth()+1}}-{{activityDate.getFullYear()}}</span>
+    </div>
+    <div class="column" *ngIf="requestType == 'invite_request'">
+        <span>Time</span>
+        <span class="data">{{activityTimeStart}} - {{activityTimeEnd}}</span>
+    </div>
+    <div class="phoneIcon2" (click)="AcceptRequest()">
+        <mat-icon style="margin-right: 50px;" class="icon" >check_circle</mat-icon>
+    </div>
+    <div class="phoneIcon2"(click)="DenyRequest()">
+        <mat-icon class="icon" >cancel</mat-icon>
+    </div>
+    <div class="column" style="margin-left: 100px;" (click)="AcceptRequest()">
+        <mat-icon class="icon" >check_circle</mat-icon>
+    </div>
+    <div class="column" (click)="DenyRequest()">
+        <mat-icon class="icon" >cancel</mat-icon>
+    </div>
+    
+</div>

@@ -35,8 +35,8 @@
     </div>
     <div id="UserDetails">
         <img id="UserImage" src="/assets/user-photo/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" alt="none">
-        <span class="UserDetailsText">Name</span>
-        <span class="UserDetailsText">Surname</span>
+        <span class="UserDetailsText">{{Username}}</span>
+        <span class="UserDetailsText">{{UserSurname}}</span>
     </div>
 
     <div id="SliderMonth">
@@ -59,9 +59,9 @@
 </div>
 
 
-<app-side-menu></app-side-menu>
+<app-side-menu (menuNavigateEmitter)="menuNavigate($event)"></app-side-menu>
 
-<div id="infoActivity" [ngClass]="showActivityInfo ? 'infoActivityShow' : 'infoActivityNotShow'">
+<div *ngIf="!hideComponentOverflow" id="infoActivity" [ngClass]="showActivityInfo ? 'infoActivityShow' : 'infoActivityNotShow'">
     <div id="infoContainer">
         <div class="exitActivityInfoIcon">
             <mat-icon (click)="closeActivityInfoPanel()">cancel</mat-icon>
@@ -85,7 +85,7 @@
         </div>
         <div class="infoActivityRow">
             <span class="infoActivityRowTitle">Date</span>
-            <div class="infoActivityRowData">{{activityDataModel.date.getDate() + " - " +(activityDataModel.date.getMonth()+1) + " - "+ activityDataModel.date.getFullYear()}}</div>
+            <div class="infoActivityRowData">{{activityDataModel.date.getDate() + "-" +(activityDataModel.date.getMonth()+1) + "-"+ activityDataModel.date.getFullYear()}}</div>
         </div>
 
         <div class="infoActivityRow">
@@ -119,7 +119,7 @@
     </div>
 </div>
 
-<div id="addActivity" [ngClass]="showAddActivity ? 'addActivityShow' : 'addActivityNotShow'">
+<div *ngIf="!hideComponentOverflow" id="addActivity" [ngClass]="showAddActivity ? 'addActivityShow' : 'addActivityNotShow'">
     <div id="addActivityContainer">
         <div class="exitAddActivityIcon">
             <mat-icon (click)="closeAddActivityPanel()">cancel</mat-icon>
@@ -127,28 +127,53 @@
         <div class="inputDataActiviy">
             <app-text-filed-add-act-text id="newActivityTitle" [placeholder]="'Title'"></app-text-filed-add-act-text>
             <app-text-filed-add-act-text id="newActivityDescription" [placeholder]="'Description'"></app-text-filed-add-act-text>
-            <app-text-filed-add-act-text id="newActivityCity" [placeholder]="'Date'"></app-text-filed-add-act-text>
-            <app-text-filed-add-act-text id="newActivityAddress" [placeholder]="'TimeStart'"></app-text-filed-add-act-text>
-            <app-text-filed-add-act-text id="newActivityType" [placeholder]="'Type'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityCity" [placeholder]="'City'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityAddress" [placeholder]="'Address'"></app-text-filed-add-act-text>
+            <div id="dataPicker"> 
+                <span class="infoActivityRowTitle" style="margin-left: 0px;font-size: 16px;">Activity Type</span>
+                <mat-radio-group id="newActivityType"  (change)="OnTypeChange($event.value)">
+                    <mat-radio-button value="P">Public (P)</mat-radio-button>
+                    <mat-radio-button value="R">Restricted (R)</mat-radio-button>
+                    <mat-radio-button value="PR" [checked]="typeNewActivity === 'PR'">Private (PR)</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            
             
             
             <div id="dataPicker"> 
+                <span class="infoActivityRowTitle" style="font-size: 16px;">Date</span>
                 <mat-form-field color="accent" appearance="fill">
                     <mat-label>Date</mat-label>
-                    <input matInput [matDatepicker]="picker1">
+                    <input #input matInput [matDatepicker]="picker1" (dateInput)="OnDateChange($event.value)">
                     <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker1 ></mat-datepicker>
                 </mat-form-field>
             </div>
-            <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
-                <hr>
-                <pre>Selected time: {{time | json}}</pre>
+            <span class="infoActivityRowTitle" style="margin-left: -10px;font-size: 16px;">Time Start</span>
+            <ngb-timepicker #timePicker1 [(ngModel)]="timeStartNewActivity"></ngb-timepicker>
 
-                Increment hours
+            <span class="infoActivityRowTitle" style="margin-left: -10px;font-size: 16px;">Time End</span>
+            <ngb-timepicker #timePicker2 [(ngModel)]="timeEndNewActivity"></ngb-timepicker>
 
-            <app-text-filed-add-act-text id="newActivityTimeStart" [placeholder]="'TimeStart'"></app-text-filed-add-act-text>
-            <app-text-filed-add-act-text id="newActivityTimeEnd" [placeholder]="'TimeEnd'"></app-text-filed-add-act-text>
+           
+            <div id="dataPicker" style="margin-top: 0px;"> 
+                <span class="infoActivityRowTitle" style="font-size: 16px;">Add Friend</span>
+                <section class="example-section" style="display: flex; flex-direction:column">
+                    <ng-container *ngFor="let friend of friendList">
+                        <mat-checkbox #checkboxes style="margin-top: 4px; color:white" (change)="getUserInvite($event)" class="example-margin" value="{{friend.email}}" [disabled]="typeNewActivity != 'R' && typeNewActivity != 'P'">{{friend.name}} {{friend.surname}}</mat-checkbox>
+                    </ng-container>
+                </section>
+                
+            </div>    
+            
+
+            <div class="containerAddNewActivityButton">
+                <mat-icon (click)="AddNewActivity()" class="iconAddActivity">add_circle_outline</mat-icon>
+            </div>
+
+            
+
         </div>
     </div>
 </div>

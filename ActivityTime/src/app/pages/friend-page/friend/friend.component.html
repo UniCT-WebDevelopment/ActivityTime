@@ -1,0 +1,28 @@
+<div id="Title">Discovery Friend</div>
+<div id="gridContainer">
+    <div id="searchBar">
+        <app-search-bar (searchResultEmitter)="searchBarResultTrigger($event)"></app-search-bar>
+    </div>
+    <div id="resultSearch">
+        <div class="container">
+            <span style="padding-bottom: 20px;padding-left: 20px;">Users</span>
+            <ng-container *ngFor="let user of userFound">
+                <app-friend-field (notificationSenderEmitter)="notificationSenderTrigger($event)" [name]="user.name" [surname]="user.surname" [email]="user.email"></app-friend-field>
+            </ng-container>
+        </div>
+    </div>
+    <div id="friendList">
+        <div class="container">
+            <span style="padding-bottom: 20px;padding-left: 20px;">Your Friends</span>
+            <ng-container *ngFor="let friend of friendsList">
+                <app-friend-field [name]="friend.name" [surname]="friend.surname" [showAllData]=false></app-friend-field>
+            </ng-container>
+            
+            
+        </div>
+    </div>
+    
+    
+</div>
+
+<app-side-menu></app-side-menu>

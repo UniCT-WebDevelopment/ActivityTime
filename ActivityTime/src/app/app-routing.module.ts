@@ -15,6 +15,14 @@ const routes: Routes = [
     loadChildren: () => import("./pages/home-page/home-page.module").then((module) => module.HomePageModule)
   },
   {
+    path: "friend",
+    loadChildren: () => import("./pages/friend-page/friend-page.module").then((module) => module.FriendPageModule)
+  },
+  {
+    path: "notifications",
+    loadChildren: () => import("./pages/notifications-page/notifications-page.module").then((module) => module.NotificationsPageModule)
+  },
+  {
     path: "**",
     loadChildren: () => import("./pages/login-page/login-page.module").then((module) => module.LoginPageModule)
   },

@@ -21,6 +21,9 @@ import { DayActComponent } from './day-act/day-act.component';
 import { ActivityComponent } from './activity/activity.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { TextFiledAddActTextComponent } from './text-filed-add-act-text/text-filed-add-act-text.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { FriendFieldComponent } from './friend-field/friend-field.component';
+import { NotificationFieldComponent } from './notification-field/notification-field/notification-field.component';
 
 
 
@@ -31,7 +34,7 @@ import { TextFiledAddActTextComponent } from './text-filed-add-act-text/text-fil
 
 @NgModule({
   declarations: [
-  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent, ActivityComponent, SideMenuComponent, TextFiledAddActTextComponent
+  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent, ActivityComponent, SideMenuComponent, TextFiledAddActTextComponent, SearchBarComponent, FriendFieldComponent, NotificationFieldComponent, 
   ],
   imports: [
     CommonModule, 
@@ -42,7 +45,7 @@ import { TextFiledAddActTextComponent } from './text-filed-add-act-text/text-fil
     MatIconModule
   ],
   exports:[
-    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent,ActivityComponent,SideMenuComponent, TextFiledAddActTextComponent
+    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent,ActivityComponent,SideMenuComponent, TextFiledAddActTextComponent, SearchBarComponent, FriendFieldComponent, NotificationFieldComponent
   ]
 })
 export class SharedComponentsModule {}

@@ -11,6 +11,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule } from '@angular/material/input';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 
 
@@ -30,8 +33,9 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     NgbModule,
-    FormsModule
-    
+    FormsModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ],
 })
 export class HomePageModule { }

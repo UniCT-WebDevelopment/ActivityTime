@@ -78,6 +78,40 @@ export class ApiService {
     const body = {"email":email}
     return this.http.post(this.baseApiURL + 'inProgressNotifications', body, {'headers':headers})
   }
+
+  AddActivity(dataMap:Map<String,String>): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    const json_data = Object.fromEntries(dataMap);
+    return this.http.post(this.baseApiURL + 'AddActivity', json_data, {'headers':headers})
+  }
+
+  GetUserForFriend(data:String): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    return this.http.post(this.baseApiURL + 'userForFriend', {searchString:data}, {'headers':headers})
+  }
+  
+  AddNotification(dataMap:Map<String,Object>): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    const json_data = Object.fromEntries(dataMap);
+    return this.http.post(this.baseApiURL + 'sendNotification', json_data, {'headers':headers})
+  }
+
+  AddFriend(dataMap:Map<String,Object>): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    const json_data = Object.fromEntries(dataMap);
+    return this.http.post(this.baseApiURL + 'addFriend', json_data, {'headers':headers})
+  }
+
+  AddActivityPartecipant(dataMap:Map<String,Object>): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    const json_data = Object.fromEntries(dataMap);
+    return this.http.post(this.baseApiURL + 'addActivityPartecipant', json_data, {'headers':headers})
+  }
+
+  DeleteNotification(id:Number): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    return this.http.post(this.baseApiURL + 'deleteNotification', {"id":id}, {'headers':headers})
+  }
   
  
 }

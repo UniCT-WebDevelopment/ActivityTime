@@ -165,7 +165,7 @@ router.post("/friends", (req, res) => {
 })
 
 router.post("/newNotifications", (req, res) => {
-    var query_getAllNotificationsUser= "SELECT id, type, cod_sender, cod_activity,status_notification, name, surname FROM Notifications JOIN users ON users.email = notifications.cod_sender WHERE Notifications.cod_usr = ?";
+    var query_getAllNotificationsUser= "SELECT id, type, cod_sender, cod_activity,status_notification,activity_title,date,time_start,time_end, name, surname FROM Notifications JOIN users ON users.email = notifications.cod_sender WHERE Notifications.cod_usr = ? ORDER BY notifications.type";
     var x = 0;
     var notifications = []
 
@@ -183,7 +183,7 @@ router.post("/newNotifications", (req, res) => {
         }
         
         while(result[x] != null) {
-            notifications.push({"id":result[x].id,"type":result[x].type,"cod_sender":result[x].cod_sender,"name_sender":result[x].name,"surname_sender":result[x].surname,"cod_activity":result[x].cod_activity,"status_notification":result[x].status_notification})
+            notifications.push({"id":result[x].id,"type":result[x].type,"cod_sender":result[x].cod_sender,"name_sender":result[x].name,"surname_sender":result[x].surname,"cod_activity":result[x].cod_activity,"status_notification":result[x].status_notification,"activity_title":result[x].activity_title,"date":result[x].date,"time_start":result[x].time_start,"time_end":result[x].time_end})
             x = x+1
         }
         if(x==0) {
@@ -196,7 +196,7 @@ router.post("/newNotifications", (req, res) => {
 })
 
 router.post("/inProgressNotifications", (req, res) => {
-    var query_getAllNotificationsUser= "SELECT id, type, cod_sender, cod_activity, name, surname,email,status_notification FROM Notifications JOIN users ON users.email = notifications.cod_usr WHERE Notifications.cod_sender = ?";
+    var query_getAllNotificationsUser= "SELECT id, type, cod_sender, cod_activity, activity_title,date,time_start,time_end, name, surname,email,status_notification FROM Notifications JOIN users ON users.email = notifications.cod_usr WHERE Notifications.cod_sender = ? ORDER BY notifications.type";
     var x = 0;
     var notifications = []
 
@@ -214,7 +214,7 @@ router.post("/inProgressNotifications", (req, res) => {
         }
         
         while(result[x] != null) {
-            notifications.push({"id":result[x].id,"type":result[x].type,"email_recipient":result[x].email,"name_recipient":result[x].name,"surname_recipient":result[x].surname,"cod_activity":result[x].cod_activity,"status_notification":result[x].status_notification})
+            notifications.push({"id":result[x].id,"type":result[x].type,"email_recipient":result[x].email,"name_recipient":result[x].name,"surname_recipient":result[x].surname,"cod_activity":result[x].cod_activity,"status_notification":result[x].status_notification,"activity_title":result[x].activity_title,"date":result[x].date,"time_start":result[x].time_start,"time_end":result[x].time_end})
             x = x+1
         }
         if(x==0) {
@@ -223,6 +223,243 @@ router.post("/inProgressNotifications", (req, res) => {
         }  
         
         if(x>0){res.send({ resp: { "inProgressNotifications": notifications} });}
+    });
+})
+
+router.post("/AddActivity", (req, res) => {
+    var query_AddNewActivity = "INSERT INTO `Activities` (`title`, `description`, `date`, `time_start`, `time_end`, `city`, `address`, `cod_founder`, `type`) VALUES ?"
+    
+    console.log("/api/AddActivity triggered");
+    console.log(req.body.title)
+    console.log(req.body.description)
+    console.log(req.body.date)
+    console.log(req.body.timeStart)
+    console.log(req.body.timeEnd)
+    console.log(req.body.city)
+    console.log(req.body.address)
+    console.log(req.body.type)
+    console.log(req.body.codFounder)
+    console.log(req.body.inviteFriend)
+    
+    var values = [  
+        [req.body.title, req.body.description, req.body.date, req.body.timeStart,req.body.timeEnd,req.body.city,req.body.address,req.body.codFounder,req.body.type]
+    ];  
+    if (req.body.title == undefined || req.body.title == "" || req.body.date == undefined || req.body.date == "" || req.body.city == undefined || req.body.city == "" || req.body.address == undefined || req.body.address == "" || req.body.timeStart == undefined || req.body.timeStart == "" || req.body.codFounder == undefined || req.body.codFounder == "" || req.body.type == undefined || req.body.type == "" ) {
+        res.send({ resp: "DENY" })
+        return
+    }
+    
+
+    
+    con.query(query_AddNewActivity, [values], async function (err, result, fields) {
+        if (err) {
+            console.log(err)
+            res.send({ resp: "ERR" })
+            return
+        }
+
+        let inserted_id = result.insertId;
+        if(req.body.inviteFriend != undefined){
+            console.log("c'è una lista degli invitati")
+            invitateFriendList = JSON.parse(req.body.inviteFriend)
+            console.log(invitateFriendList)
+            
+            
+            for(let email of invitateFriendList){
+                console.log("invitato: "+ email)
+                await sendNotifiationAsync(req.body.codFounder,email,inserted_id,req.body.title,req.body.date,req.body.timeStart,req.body.timeEnd)
+            }
+            
+            
+            res.send({"resp":"OK"})
+
+        }
+        else{
+            console.log("non c'è una lista degli invitati")
+            res.send({"resp":"OK"})
+        }
+        
+    });
+   
+})
+
+router.post("/userForFriend", (req, res) => {
+    var query_getAllUserForFriend= "SELECT name, surname, email, url_photo FROM users WHERE users.name LIKE ";
+    var x = 0;
+    var friend = []
+
+    console.log("/api/userForFriend triggered");
+    if (req.body.searchString == undefined || req.body.searchString == "") {
+        res.send({ resp: "DENY" })
+        return
+    }
+
+    let stringLike = " '%"+req.body.searchString+"%' "+ " or users.surname LIKE "+" '%"+req.body.searchString+"%'";
+    query_getAllUserForFriend += stringLike
+    console.log(query_getAllUserForFriend)
+    con.query(query_getAllUserForFriend, async function (err, result, fields) {
+        if (err) {
+            res.send({ resp: "ERR" })
+            return
+        }
+        
+        while(result[x] != null) {
+            friend.push({"name":result[x].name,"surname":result[x].surname,"email":result[x].email,"url_photo":result[x].url_photo})
+            x = x+1
+        }
+        if(x==0) {
+            res.send({ resp: "EMPTY" })
+            return
+        }  
+        
+        if(x>0){res.send({ resp: { "friendlist": friend} });}
+    });
+})
+
+router.post("/sendNotification", (req, res) => {
+    var query_AddNewNotification = "INSERT INTO `Notifications` (`type`, `cod_usr`, `cod_sender`, `cod_activity`, `status_notification`,`activity_title`,`date`,`time_start`,`time_end`) VALUES ?"
+    
+    console.log("/api/sendNotification triggered");
+    console.log(req.body.type)
+    console.log(req.body.cod_usr)
+    console.log(req.body.cod_sender)
+    console.log(req.body.cod_activity)
+    console.log(req.body.status_notification)
+    console.log(req.body.activity_title)
+    
+    
+    if (req.body.type == undefined || req.body.type == "" || req.body.cod_usr == undefined || req.body.cod_usr == "" || req.body.cod_sender == undefined || req.body.cod_sender == "") {
+        res.send({ resp: "DENY" })
+        return
+    }
+    
+    var values = [  
+        [req.body.type, req.body.cod_usr, req.body.cod_sender, req.body.cod_activity,req.body.status_notification,req.body.activity_title,req.body.date,req.body.time_start,req.body.time_end]
+    ];  
+    console.log("------ Provo la query")
+    con.query(query_AddNewNotification, [values], async function (err, result, fields) {
+        console.log("------ Dentro la query")
+        if (err) {
+            console.log(err)
+            res.send({ resp: "ERR" })
+            return
+        }
+        res.send({"resp":"OK"})
+    });
+   
+})
+
+async function sendNotifiationAsync(sender,email,codActivity,titleActivity,date,time_start,time_end){
+    var query_AddNewNotification = "INSERT INTO `Notifications` (`type`, `cod_usr`, `cod_sender`, `cod_activity`, `status_notification`,`activity_title`,`date`,`time_start`,`time_end`) VALUES ?"
+    const promise =  new Promise((resolve,reject) => {
+        var values = [  
+            ["invite_request", email, sender, codActivity,"N",titleActivity,date,time_start,time_end]
+        ];  
+        con.query(query_AddNewNotification, [values], async function (err, result, fields) {
+            console.log("------ Dentro la query")
+            if (err) {
+                console.log(err)
+                return
+            } 
+            resolve()
+                
+        });
+    });
+    return await promise
+}
+
+router.post("/addFriend", (req, res) => {
+    var query_AddNewFriend = "INSERT INTO `Friendlist` (`cod_usr`, `cod_friend`) VALUES ?"
+    
+    console.log("/api/addFriend triggered");
+    console.log(req.body.cod_usr)
+    console.log(req.body.cod_friend)
+    
+    
+    
+    if (req.body.cod_usr == undefined || req.body.cod_usr == "" || req.body.cod_friend == undefined || req.body.cod_friend == "") {
+        res.send({ resp: "DENY" })
+        return
+    }
+    
+    var values = [  
+        [req.body.cod_usr, req.body.cod_friend]
+    ];  
+    console.log("------ Provo la query")
+    con.query(query_AddNewFriend, [values], async function (err, result, fields) {
+        console.log("------ Dentro la query")
+        if (err) {
+            console.log(err)
+            res.send({ resp: "ERR" })
+            return
+        }
+        values = [  
+            [req.body.cod_friend, req.body.cod_usr]
+        ];  
+        con.query(query_AddNewFriend, [values], async function (err, result, fields) {
+            if (err) {
+                console.log(err)
+                res.send({ resp: "ERR" })
+                return
+            }
+            res.send({"resp":"OK"})
+        });
+        
+    });
+})
+
+router.post("/addActivityPartecipant", (req, res) => {
+    var query_AddNewActivityPartecipant = "INSERT INTO `usrXact` (`cod_usr`, `cod_act`,`status`) VALUES ?"
+    
+    console.log("/api/addActivityPartecipant triggered");
+    console.log(req.body.cod_usr)
+    console.log(req.body.cod_act)
+    console.log(req.body.status)
+    
+    
+    
+    if (req.body.cod_usr == undefined || req.body.cod_usr == "" || req.body.cod_act == undefined || req.body.cod_act == "" || req.body.status == undefined || req.body.status == "") {
+        res.send({ resp: "DENY" })
+        return
+    }
+    
+    var values = [  
+        [req.body.cod_usr, req.body.cod_act, req.body.status]
+    ];  
+    console.log("------ Provo la query")
+    con.query(query_AddNewActivityPartecipant, [values], async function (err, result, fields) {
+        console.log("------ Dentro la query")
+        if (err) {
+            console.log(err)
+            res.send({ resp: "ERR" })
+            return
+        }
+        res.send({"resp":"OK"})
+    });
+})
+
+router.post("/deleteNotification", (req, res) => {
+    var query_DeleteNotification = "DELETE FROM `Notifications` WHERE Notifications.id = ?";
+    
+    console.log("/api/deleteNotification triggered");
+    console.log(req.body.id)
+    
+    
+    
+    if (req.body.id == undefined || req.body.id == "") {
+        res.send({ resp: "DENY" })
+        return
+    }
+    
+    console.log("------ Provo la query")
+    con.query(query_DeleteNotification, [req.body.id], async function (err, result, fields) {
+        console.log("------ Dentro la query")
+        if (err) {
+            console.log(err)
+            res.send({ resp: "ERR" })
+            return
+        }
+        res.send({"resp":"OK"})
     });
 })
 

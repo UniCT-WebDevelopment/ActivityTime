@@ -1,0 +1,22 @@
+<div >
+    <div id="imagePhone" class="iconPhone" *ngIf="showAllData">
+        <img [ngClass]="showAllData ? 'UserImageBig' : 'UserImageLittle'" src="/assets/user-photo/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" alt="none">
+    </div>
+    <img id="imageDesktop" [ngClass]="showAllData ? 'UserImageBig' : 'UserImageLittle'" src="/assets/user-photo/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" alt="none">
+    <div class="column">
+        <span >Name</span>
+        <span class="data">{{name}}</span>
+    </div>
+    <div class="column" style="margin-right: 30px;">
+        <span>Surname</span>
+        <span class="data">{{surname}}</span>
+    </div>
+    <div class="column" *ngIf="showAllData">
+        <span>Email</span>
+        <span class="data">{{email}}</span>
+    </div>
+    <div class="iconsContainer" *ngIf="showAllData" (click)="SendFriendRequest()">
+        <mat-icon class="icon" >add_circle_outline</mat-icon>
+    </div>
+    
+</div>

@@ -38,6 +38,8 @@ html,body {
     justify-content: flex-start;
     margin-top:  10%;
     padding-bottom: 10%;
+    z-index: 10;
+    
 }
 #UserImage{
     width: 4%;
@@ -156,6 +158,7 @@ html,body {
 
 #infoActivity{
     display: flex;
+    overflow: scroll;
     flex-direction:column;
     position: fixed;
     top: 0px;
@@ -166,18 +169,20 @@ html,body {
 }
 
 .infoActivityShow{
+    z-index: 20;
     opacity: 1;
     transform: translateX(0px);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s ease-in-out;
     transform-origin: right;
     cursor: pointer;
 }
 
 .infoActivityNotShow{
+    z-index: -10;
     transform: translateX(340px);
     cursor: pointer;
     transform-origin: right;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s ease-in-out;
     z-index: 0;
 }
 
@@ -194,6 +199,30 @@ html,body {
 .exitActivityInfoIcon{
     margin-top: 20px;
     transform: scale(2.5);
+}
+.infoActivityRow{
+    margin-top: 30px;
+}
+
+.infoActivityRowTitle{
+    position: relative;
+    word-wrap: break-word;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 380px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.infoActivityRowData{
+    position: relative;
+    word-wrap: break-word;
+    margin-top: 2px;
+    color: white;
+    font-size: 15px;
+    width: 380px;
+    padding-bottom: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .activityManager{
@@ -296,6 +325,7 @@ html,body {
 
 #addActivity{
     display: flex;
+    overflow: scroll;
     flex-direction:column;
     position: fixed;
     top: 0px;
@@ -306,6 +336,7 @@ html,body {
 }
 
 .addActivityShow{
+    z-index: 20;
     opacity: 1;
     transform: translateX(0px);
     transition: transform 0.3s ease-in-out;
@@ -314,6 +345,7 @@ html,body {
 }
 
 .addActivityNotShow{
+    z-index: -10;
     transform: translateX(340px);
     cursor: pointer;
     transform-origin: right;
@@ -339,8 +371,55 @@ html,body {
     margin-top: 0px;
     width: 90%;
 }
+ngb-timepicker{
+    @import "/node_modules/bootstrap/scss/bootstrap.scss";
+}
 
+#addActivity::-webkit-scrollbar {
+    display: none;
+}
+mat-form-field{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+#dataPicker{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: -10px;
+    margin-top: 50px;
+}
 
+mat-radio-group{
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+mat-radio-button{
+    width: 100%; 
+    margin-top:0px;
+    padding-top: 5px;
+}
+
+.exitAddActivityIcon{
+    margin-left: -5px;
+    margin-top: 15px;
+    transform: scale(2.3);
+}
+.inputDataActiviy{
+    margin-top: 0px;
+    width: 90%;
+}
+
+.containerAddNewActivityButton{
+    position: relative;
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 20px;
+    color: white;
+}
 
 
 @media only screen and (min-width: 500px){
@@ -365,7 +444,7 @@ html,body {
     }
 
     #SliderMonth{
-        
+        z-index: 2;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -531,6 +610,9 @@ html,body {
         background-color: cornflowerblue;
         overflow-y: scroll;
     }
+    #infoActivity::-webkit-scrollbar {
+        display: none;
+    }
 
     .infoActivityShow{
         opacity: 1;
@@ -677,6 +759,7 @@ html,body {
         right: 45px;
         display: flex;
         color: cornflowerblue;
+        z-index: 5;
     }
     .iconAddActivity{
         position: relative;
@@ -690,6 +773,7 @@ html,body {
     }
 
     #addActivity{
+        overflow-y: scroll;
         display: flex;
         flex-direction:column;
         position: fixed;
@@ -729,6 +813,8 @@ html,body {
 
     #dataPicker{
         position: relative;
+        display: flex;
+        flex-direction: column;
         left: -10px;
         margin-top: 50px;
     }
@@ -741,13 +827,27 @@ html,body {
         margin-top: 0px;
         width: 90%;
     }
+    .containerAddNewActivityButton{
+        position: relative;
+        margin-top: 40px;
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 20px;
+        color: white;
+    }
     
-
+    mat-radio-group{
+        position: relative;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    mat-radio-button{
+        width: 100%; 
+        margin-top:0px;
+        padding-top: 5px;
+    }
     
-    
-    
-
-
 
     
 }

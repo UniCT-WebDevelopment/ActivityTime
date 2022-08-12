@@ -1,5 +1,9 @@
-1) Compeltare graficamente il login OK
-2) mostra nel login tutto rosso se l'accesso non va a buon fine
-3) Completare dati delle notification nel Database
-4) Inserisci una data vera per fare il compare nelle activity
-5) Iniziare Home
+sistemare le validazioni
+
+sistemare il CSS
+
+sistemare gestione delle risposte del server
+
+sistemare la ricerca degli utenti aggiungendo anche l'email al LIKE
+
+Aggiungere l'activity Zone

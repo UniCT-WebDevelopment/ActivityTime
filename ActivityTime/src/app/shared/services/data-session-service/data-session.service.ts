@@ -107,7 +107,11 @@ export class DataSessionService {
                         let surname_sender = response["resp"]["newNotifications"][i]["surname_sender"]
                         let cod_activity = response["resp"]["newNotifications"][i]["cod_activity"]
                         let status_notification = response["resp"]["newNotifications"][i]["status_notification"]
-                        userNewNotifications.push(new NewNotificationsModel(id,type,cod_sender,name_sender,surname_sender,cod_activity,status_notification))
+                        let activity_title = response["resp"]["newNotifications"][i]["activity_title"]
+                        let date  =  response["resp"]["newNotifications"][i]["date"]
+                        let time_start = response["resp"]["newNotifications"][i]["time_start"]
+                        let time_end = response["resp"]["newNotifications"][i]["time_end"]
+                        userNewNotifications.push(new NewNotificationsModel(id,type,cod_sender,name_sender,surname_sender,cod_activity,status_notification,activity_title,date,time_start,time_end))
                         i = i+1
                       }
                     }
@@ -125,7 +129,11 @@ export class DataSessionService {
                             let surname_recipient = response["resp"]["inProgressNotifications"][i]["surname_recipient"]
                             let cod_activity = response["resp"]["inProgressNotifications"][i]["cod_activity"]
                             let status_notification = response["resp"]["inProgressNotifications"][i]["status_notification"]
-                            userInProgressNotifications.push(new InProgressNotificationsModel(id,type,email_recipient,name_recipient,surname_recipient,cod_activity,status_notification))
+                            let activity_title = response["resp"]["inProgressNotifications"][i]["activity_title"]
+                            let date = response["resp"]["inProgressNotifications"][i]["date"]
+                            let time_start = response["resp"]["inProgressNotifications"][i]["time_start"]
+                            let time_end = response["resp"]["inProgressNotifications"][i]["time_end"]
+                            userInProgressNotifications.push(new InProgressNotificationsModel(id,type,email_recipient,name_recipient,surname_recipient,cod_activity,status_notification,activity_title,date,time_start,time_end))
                             i = i+1
                           }
                         }
@@ -266,7 +274,11 @@ export class DataSessionService {
                         let surname_sender = response["resp"]["newNotifications"][i]["surname_sender"]
                         let cod_activity = response["resp"]["newNotifications"][i]["cod_activity"]
                         let status_notification = response["resp"]["newNotifications"][i]["status_notification"]
-                        userNewNotifications.push(new NewNotificationsModel(id,type,cod_sender,name_sender,surname_sender,cod_activity,status_notification))
+                        let activity_title = response["resp"]["newNotifications"][i]["activity_title"]
+                        let date = response["resp"]["newNotifications"][i]["date"]
+                        let time_start = response["resp"]["newNotifications"][i]["time_start"]
+                        let time_end = response["resp"]["newNotifications"][i]["time_end"]
+                        userNewNotifications.push(new NewNotificationsModel(id,type,cod_sender,name_sender,surname_sender,cod_activity,status_notification,activity_title,date,time_start,time_end))
                         i = i+1
                       }
                     }
@@ -284,7 +296,11 @@ export class DataSessionService {
                             let surname_recipient = response["resp"]["inProgressNotifications"][i]["surname_recipient"]
                             let cod_activity = response["resp"]["inProgressNotifications"][i]["cod_activity"]
                             let status_notification = response["resp"]["inProgressNotifications"][i]["status_notification"]
-                            userInProgressNotifications.push(new InProgressNotificationsModel(id,type,email_recipient,name_recipient,surname_recipient,cod_activity,status_notification))
+                            let activity_title = response["resp"]["inProgressNotifications"][i]["activity_title"]
+                            let date = response["resp"]["inProgressNotifications"][i]["date"]
+                            let time_start = response["resp"]["inProgressNotifications"][i]["time_start"]
+                            let time_end = response["resp"]["inProgressNotifications"][i]["time_end"]
+                            userInProgressNotifications.push(new InProgressNotificationsModel(id,type,email_recipient,name_recipient,surname_recipient,cod_activity,status_notification,activity_title,date,time_start,time_end))
                             i = i+1
                           }
                         }
