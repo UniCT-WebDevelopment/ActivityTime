@@ -1,0 +1,43 @@
+<div class="mainContainer">
+    <div class="row" style="padding-top: 30px">
+        <b>Title</b>
+        <span class="data">{{activityTitle}}</span>
+    </div>
+
+    <div class="row">
+        <b>City</b>
+        <span class="data">{{activityCity}}</span>
+    </div>
+
+    <div class="row" >
+        <b>Address</b>
+        <span class="data">{{activityAddress}}</span>
+    </div>
+
+    <div class="row" >
+        <b>Date</b>
+        <span class="data">{{activityDate.getDate()}}-{{activityDate.getMonth()+1}}-{{activityDate.getFullYear()}}</span>
+    </div>
+
+    <div class="row">
+        <b>Time</b>
+        <span class="data">{{activityTimeStart}} - {{activityTimeEnd}}</span>
+    </div>
+
+    <div class="row" >
+        <b>Founder</b>
+        <span class="data"><b>Name: </b>{{activityFounderName}}</span>
+        <span class="data"><b>Surname: </b>{{activityFounderSurname}}</span>
+        <span class="data"><b>Email: </b>{{activityFounderEmail}}</span>
+    </div>
+
+    <div class="row" style="width:82%;padding-bottom:10px">
+        <b>Description</b>
+        <span class="data">{{activityDescription}}</span>
+    </div>
+
+    <div class="joinButtonContainer">
+        <mat-icon class="icon" (click)="SendRequestForJoin()">add_circle_outline</mat-icon>
+    </div>
+
+</div>

@@ -1,0 +1,115 @@
+.mainContainer{
+    height: 290px;
+    width: 250px;
+    background-color: cornflowerblue;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: scroll;
+}
+
+.row{
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    word-wrap: break-word;
+    padding-left: 30px;
+    font-size: 18px;
+    padding-top: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    
+}
+
+.data{
+    margin-top: 6px;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+
+.mainContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.joinButtonContainer{
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 200px;
+    position: absolute;
+    padding-top: 35px;
+}
+
+.icon{
+    color: white;
+    background-color: transparent;
+    position: relative;
+    transform: scale(1.7);
+    z-index: 10;
+}
+
+
+//Desktop
+@media only screen and (min-width: 500px){
+    .mainContainer{
+        height: 420px;
+        width: 300px;
+        background-color: cornflowerblue;
+        border-radius: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow: scroll;
+    }
+    
+    .row{
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        word-wrap: break-word;
+        padding-left: 30px;
+        font-size: 18px;
+        padding-top: 20px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: white;
+        
+    }
+    
+    .data{
+        margin-top: 6px;
+        font-weight: normal;
+        font-size: 16px;
+    }
+    
+    
+    .mainContainer::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .joinButtonContainer{
+        display: flex;
+        justify-content: flex-end;
+        padding-left: 240px;
+        position: absolute;
+        padding-top: 30px;
+    }
+    
+    .icon{
+        color: white;
+        background-color: transparent;
+        position: relative;
+        transform: scale(1.7);
+        z-index: 10;
+    }
+    .icon:hover{
+        cursor: pointer;
+        transform: scale(2);
+        transition: transform 0.2s ease-in-out;
+    }
+    .icon:not(:hover){
+        transform: scale(1.7);
+        transition: transform 0.2s ease-in-out;
+    }
+}
+

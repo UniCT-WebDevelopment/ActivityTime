@@ -31,6 +31,14 @@ export class SideMenuComponent implements OnInit {
     console.log("delayFinish")
     this.router.navigate(["/notifications"])
   }
+
+  async GoActivityZone(){
+    this.menuNavigateEmitter.emit("activityZone")
+    console.log("delayStart")
+    await new Promise(f => setTimeout(f, 100));
+    console.log("delayFinish")
+    this.router.navigate(["/activityZone"])
+  }
   async Logout(){
     this.menuNavigateEmitter.emit("logout")
     await new Promise(f => setTimeout(f, 100));

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSessionService } from 'src/app/shared/services/data-session-service/data-session.service';
+import { LoadingService } from 'src/app/shared/services/loading-services/loading.service';
 
 @Component({
   selector: 'app-notifications',
@@ -10,7 +11,8 @@ import { DataSessionService } from 'src/app/shared/services/data-session-service
 export class NotificationsComponent implements OnInit {
   friendNotificationsList = []
   activityNotificationsList = []
-  constructor(private dataSessionService : DataSessionService, private router : Router) { 
+  activityJoinNotificationsList = []
+  constructor(private dataSessionService : DataSessionService, private router : Router, private loadingService : LoadingService) { 
     if(!this.dataSessionService.getUser()){
       console.log("user not set")
       this.router.navigate(["/login"])
@@ -19,13 +21,16 @@ export class NotificationsComponent implements OnInit {
       dataSessionService.DBfetchUserWithoutToken(this.dataSessionService.getUser().email,this.dataSessionService.getUser().password).then(()=>{
         this.friendNotificationsList = []
         this.activityNotificationsList = []
+        this.activityJoinNotificationsList = []
         for(let notification of this.dataSessionService.getUser().newNotifications){
           if(notification.type == "friend_request") this.friendNotificationsList.push(notification)
           if(notification.type == "invite_request") {
             this.activityNotificationsList.push(notification)
           }
+          if(notification.type == "join_request") {
+            this.activityJoinNotificationsList.push(notification)
+          }
         }
-        console.log(this.dataSessionService.getUser())
       })
     }
   }
@@ -35,14 +40,18 @@ export class NotificationsComponent implements OnInit {
     this.dataSessionService.DBfetchUserWithoutToken(this.dataSessionService.getUser().email,this.dataSessionService.getUser().password).then(()=>{
       this.friendNotificationsList = []
         this.activityNotificationsList = []
+        this.activityJoinNotificationsList = []
         for(let notification of this.dataSessionService.getUser().newNotifications){
           if(notification.type == "friend_request") this.friendNotificationsList.push(notification)
           if(notification.type == "invite_request"){
             this.activityNotificationsList.push(notification)
           }
+          if(notification.type == "join_request") {
+            this.activityJoinNotificationsList.push(notification)
+          }
           
         }
-        
+        this.loadingService.hide()
     })
 
   }

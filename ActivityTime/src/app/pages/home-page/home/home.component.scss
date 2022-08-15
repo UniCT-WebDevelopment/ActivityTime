@@ -16,7 +16,6 @@ html,body {
     display: flex;
     flex-direction: row;
     
-    
 }
 .UserDetailsText{
     color: cornflowerblue;
@@ -42,7 +41,7 @@ html,body {
     
 }
 #UserImage{
-    width: 4%;
+    width: 10%;
     height: 100%;
     border-radius: 50%;
 }
@@ -306,11 +305,12 @@ html,body {
 };
 
 .containerAddActivityButton{
-    position: relative;
-    padding-top: 23px;
-    right: -30px;
+    position: absolute;
+    padding-top: 165px;
+    right: 50px;
     display: flex;
     color: cornflowerblue;
+    z-index: 5;
 }
 .iconAddActivity{
     position: relative;
@@ -754,9 +754,9 @@ mat-radio-button{
     };
 
     .containerAddActivityButton{
-        position: relative;
-        padding-top: 60px;
-        right: 45px;
+        position: absolute;
+        padding-top: 13.5%;
+        right: 65px;
         display: flex;
         color: cornflowerblue;
         z-index: 5;

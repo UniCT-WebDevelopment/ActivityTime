@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import("./pages/notifications-page/notifications-page.module").then((module) => module.NotificationsPageModule)
   },
   {
+    path: "activityZone",
+    loadChildren: () => import("./pages/activity-zone/activity-zone.module").then((module) => module.ActivityZoneModule)
+  },
+  {
     path: "**",
     loadChildren: () => import("./pages/login-page/login-page.module").then((module) => module.LoginPageModule)
   },

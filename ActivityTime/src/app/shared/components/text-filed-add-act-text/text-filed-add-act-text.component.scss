@@ -15,7 +15,22 @@
     margin-top: 30px;
     background: cornflowerblue;
     border: 3px solid cornflowerblue;
-    
+    #InputField label{
+        position: absolute;
+        top: 2px;
+        left: 0;
+        color: rgb(215, 208, 208);
+        pointer-events: none;
+        display: block;
+        transition: 0.5s;
+    }
+    #InputField input[type="text"]:focus + label, #InputField input[type="text"]:valid + label{
+        transform: translateY(-30px);
+        font-size: 14px;
+        color: cornflowerblue;
+        background: white;
+        padding: 2px 6px;
+    }
     
 }
 
@@ -83,13 +98,34 @@
 
 }
 
-.invalid{
-    transform: scale(1.1);
+.invalid{  
     position: relative;
-    width: 100%;
-    padding: 40px;
-    background: white;
-    border: 3px solid red;
-    border-radius: 100px;
+    width: 80%;
+    transform: scale(1.1);
+    padding-left: 0px;
+    margin-left: 0px;
+    margin-top: 30px;
+    background: cornflowerblue;
+    border: 3px solid cornflowerblue;
+
+    #InputField input[type="text"]:focus + label, #InputField input[type="text"]:valid + label{
+        transform: translateY(-30px);
+        font-size: 14px;
+        color: white;
+        background: red;
+        padding: 2px 6px;
+    }
+    #InputField label{
+        position: absolute;
+        top: 2px;
+        left: 0;
+        color: white;
+        background-color: red;
+        pointer-events: none;
+        display: block;
+        transition: 0.5s;
+    }
+    
+    
     
 }

@@ -5,6 +5,7 @@ import { MatRadioButton } from '@angular/material/radio';
 import { Router } from '@angular/router';
 import { NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTime } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time';
+import { timestamp } from 'rxjs';
 import { Activities } from 'src/app/shared/models/activities.model';
 import { UserFriend } from 'src/app/shared/models/user-friend.model';
 import { User } from 'src/app/shared/models/user.model';
@@ -48,7 +49,6 @@ export class HomeComponent implements OnInit {
   @ViewChild('timePicker2', { read: NgbTimepicker}) timePicker2: NgbTimepicker;
   @ViewChildren("checkboxes", { read: MatCheckbox}) checkboxes: QueryList<any>;
   
-  
 
   constructor(private apiService : ApiService,private router : Router,private dataSessionService : DataSessionService, private loadingService : LoadingService) {
     if(!this.dataSessionService.getUser()){
@@ -56,9 +56,8 @@ export class HomeComponent implements OnInit {
       this.router.navigate(["/login"])
     }
     else{
-      console.log(this.dataSessionService.getUser())
-    }
-    this.Username = dataSessionService.getUser().name
+      dataSessionService.DBfetchUserWithoutToken(this.dataSessionService.getUser().email,this.dataSessionService.getUser().password).then(()=>{
+        this.Username = dataSessionService.getUser().name
     this.UserSurname = dataSessionService.getUser().surname
     var currentYear = new Date().getFullYear()
     for(let i = 1; i < 13; ++i){
@@ -74,6 +73,24 @@ export class HomeComponent implements OnInit {
     for(let act of dataSessionService.getUser().activities.concat(dataSessionService.getUser().activitiesFounder)){
 
       this.monthsActivities[act.date.getMonth()].push(act)
+      this.monthsActivities[act.date.getMonth()].sort((a,b)=>{
+        let timeA = a.timeStart.split(':');
+        let timeB = b.timeStart.split(':');
+        if(timeA[0] > timeB[0]){
+          console.log("è piu grande a: " + a)
+          return 1
+        }
+        if(timeA[0] < timeB[0]){
+          
+          console.log("è piu grande b: " + b)
+          return -1
+        }
+
+        if(timeA[0] == timeB[0] && timeA[1] >= timeB[1]) return 1
+        if(timeA[0] == timeB[0] && timeA[1] < timeB[1]) return -1
+
+        return 0
+      })
     }
     
 
@@ -84,10 +101,9 @@ export class HomeComponent implements OnInit {
     for(let friend of dataSessionService.getUser().friends){
       this.friendList.push(friend)
     }
+      })
+    }
     
-
-    
-
     
 
   } 
@@ -101,6 +117,13 @@ export class HomeComponent implements OnInit {
     else{
       console.log(this.dataSessionService.getUser())
     }
+
+    
+    
+    
+  }
+
+  ngAfterViewInit() {
     
   }
 
@@ -191,6 +214,13 @@ export class HomeComponent implements OnInit {
     
   }
   closeAddActivityPanel(){
+    document.getElementById("newActivityTitle").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("newActivityDescription").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("newActivityCity").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("newActivityAddress").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("titleDateNewActivity").style.color = "white";
+    document.getElementById("timeStartTitle").style.color = "white";
+    document.getElementById("timeEndTitle").style.color = "white";
     document.getElementById("newActivityTitle").getElementsByTagName("input")[0].value = ""
     document.getElementById("newActivityDescription").getElementsByTagName("input")[0].value = ""
     document.getElementById("newActivityCity").getElementsByTagName("input")[0].value = ""
@@ -215,7 +245,10 @@ export class HomeComponent implements OnInit {
   OnTypeChange(type ): void {
     this.typeNewActivity = type
   }
+
+
   async AddNewActivity(){
+    let flag = false;
     let title = document.getElementById("newActivityTitle").getElementsByTagName("input")[0].value.toString();
     let description = document.getElementById("newActivityDescription").getElementsByTagName("input")[0].value.toString();
     let city = document.getElementById("newActivityCity").getElementsByTagName("input")[0].value.toString();
@@ -250,58 +283,156 @@ export class HomeComponent implements OnInit {
     console.log("date: " + this.dateNewActivity)
     console.log("timeStart: " +timeStart)
     console.log("timeEnd: " +timeEnd)
+    document.getElementById("newActivityTitle").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("newActivityDescription").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("newActivityCity").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("newActivityAddress").getElementsByTagName("div")[0].className = "valid"
+    document.getElementById("titleDateNewActivity").style.color = "white";
+    document.getElementById("timeStartTitle").style.color = "white";
+    document.getElementById("timeEndTitle").style.color = "white";
 
-    let jsonData : Map<String,String> = new Map<String,String>()
-    jsonData.set("title",title)
-    jsonData.set("description",description)
-    jsonData.set("city",city)
-    jsonData.set("address",address)
-    jsonData.set("type",type)
-    jsonData.set("date",this.dateNewActivity)
-    jsonData.set("timeStart",timeStart)
-    jsonData.set("timeEnd",timeEnd)
-    jsonData.set("codFounder",this.dataSessionService.getUser().email)
-    if(this.userToInvite.length > 0){
-      jsonData.set("inviteFriend",JSON.stringify(this.userToInvite))
+    
+    if(title == "" || title == undefined || title.length < 3){
+      document.getElementById("newActivityTitle").getElementsByTagName("div")[0].className = "invalid"
+      flag = true
     }
-    this.userToInvite = []
-    this.loadingService.show()
-    this.apiService.AddActivity(jsonData).subscribe((response)=>{ 
-      this.dataSessionService.DBfetchUserWithoutToken(this.dataSessionService.user.email,this.dataSessionService.user.password).then(() => {
-        var currentYear = new Date().getFullYear()
-        for(let i = 1; i < 13; ++i){
-          this.monthsActivities[i-1] = new Array<Activities>()
-          this.daysInYear[i] = []
-          var currentMonthDays = this.daysInMonth(i,currentYear)
-          for(let j = 0; j < currentMonthDays; ++j) { 
-            this.daysInYear[i].push(j+1);
+    if(city == "" || city == undefined || city.length < 2){
+      document.getElementById("newActivityCity").getElementsByTagName("div")[0].className = "invalid"
+      flag = true
+    }
+    if(address == "" || address == undefined || address.length < 5){
+      document.getElementById("newActivityAddress").getElementsByTagName("div")[0].className = "invalid"
+      flag = true
+    }
+    if(this.dateNewActivity == "" || this.dateNewActivity == undefined){
+      document.getElementById("titleDateNewActivity").style.color = "red";
+      flag = true
+    }
+    if(timeStart == "" || timeStart == undefined){
+      document.getElementById("timeStartTitle").style.color = "red";
+      flag = true
+    }
+    if(timeEnd == "" || timeEnd == undefined){
+      document.getElementById("timeEndTitle").style.color = "red";
+      flag = true
+    }
+    
+    console.log(Number(timeStart.split(":")[0]) + " - " + Number(timeStart.split(":")[1]))
+    if(Number(this.dateNewActivity.split("-")[1]) < new Date().getMonth()+1){
+      console.log(Number(this.dateNewActivity.split("-")[1]) + "+" + new Date().getMonth()+1)
+      console.log("l'attività è di un mese passato")
+      document.getElementById("titleDateNewActivity").style.color = "red";
+      flag = true
+    }
+    if(Number(this.dateNewActivity.split("-")[0]) < new Date().getFullYear()){
+      console.log(Number(this.dateNewActivity.split("-")[0]) + "+" + new Date().getFullYear())
+      console.log("l'attività è di un anno passato")
+      document.getElementById("titleDateNewActivity").style.color = "red";
+      flag = true
+    }
+
+    if(Number(this.dateNewActivity.split("-")[0]) > new Date().getFullYear()){
+      console.log(Number(this.dateNewActivity.split("-")[0]) + "+" + new Date().getFullYear())
+      console.log("l'attività è di un anno futuro")
+      document.getElementById("titleDateNewActivity").style.color = "red";
+      flag = true
+    }
+    if(Number(this.dateNewActivity.split("-")[2]) < new Date().getDate() && Number(this.dateNewActivity.split("-")[1]) == new Date().getMonth()+1){
+      console.log(Number(this.dateNewActivity.split("-")[2]) + "+" + new Date().getDate())
+      console.log(Number(this.dateNewActivity.split("-")[1]) + "+" + new Date().getMonth()+1)
+      console.log("l'attività è di un giorno passato di questo mese")
+      document.getElementById("titleDateNewActivity").style.color = "red";
+      flag = true
+    }
+    if(Number(timeStart.split(":")[0]) > Number(timeEnd.split(":")[0])){
+      document.getElementById("timeStartTitle").style.color = "red";
+      document.getElementById("timeEndTitle").style.color = "red";
+      console.log("il tempo di inizio in ore è maggiore di quello di fine")
+      flag = true
+    }
+    if(Number(timeStart.split(":")[0]) == Number(timeEnd.split(":")[0])){
+      if(Number(timeStart.split(":")[1]) >= Number(timeEnd.split(":")[1])){
+        document.getElementById("timeStartTitle").style.color = "red";
+        document.getElementById("timeEndTitle").style.color = "red";
+        console.log("il tempo di inizio in ore è uguale o minore ma in minuti è maggiore di quello di fine")
+        flag = true
+      }
+    }
+    if(flag == false){
+
+    
+      let jsonData : Map<String,String> = new Map<String,String>()
+      jsonData.set("title",title)
+      jsonData.set("description",description)
+      jsonData.set("city",city)
+      jsonData.set("address",address)
+      jsonData.set("type",type)
+      jsonData.set("date",this.dateNewActivity)
+      jsonData.set("timeStart",timeStart)
+      jsonData.set("timeEnd",timeEnd)
+      jsonData.set("codFounder",this.dataSessionService.getUser().email)
+      if(this.userToInvite.length > 0){
+        jsonData.set("inviteFriend",JSON.stringify(this.userToInvite))
+      }
+      this.userToInvite = []
+      this.loadingService.show()
+      this.apiService.AddActivity(jsonData).subscribe((response)=>{ 
+        this.dataSessionService.DBfetchUserWithoutToken(this.dataSessionService.user.email,this.dataSessionService.user.password).then(() => {
+          var currentYear = new Date().getFullYear()
+          for(let i = 1; i < 13; ++i){
+            this.monthsActivities[i-1] = new Array<Activities>()
+            this.daysInYear[i] = []
+            var currentMonthDays = this.daysInMonth(i,currentYear)
+            for(let j = 0; j < currentMonthDays; ++j) { 
+              this.daysInYear[i].push(j+1);
+            }
           }
-        }
-        
-        
-        for(let act of this.dataSessionService.getUser().activities.concat(this.dataSessionService.getUser().activitiesFounder)){
-          this.monthsActivities[act.date.getMonth()].push(act)
-        }
-        
+          
+          
+          for(let act of this.dataSessionService.getUser().activities.concat(this.dataSessionService.getUser().activitiesFounder)){
+            this.monthsActivities[act.date.getMonth()].push(act)
+            this.monthsActivities[act.date.getMonth()].sort((a,b)=>{
+              let timeA = a.timeStart.split(':');
+              let timeB = b.timeStart.split(':');
+              if(timeA[0] > timeB[0]){
+                console.log("è piu grande a: " + a)
+                return 1
+              }
+              if(timeA[0] < timeB[0]){
+                
+                console.log("è piu grande b: " + b)
+                return -1
+              }
+      
+              if(timeA[0] == timeB[0] && timeA[1] >= timeB[1]) return 1
+              if(timeA[0] == timeB[0] && timeA[1] < timeB[1]) return -1
+      
+              return 0
+            })
+          }
+          
 
-        for(let day of this.daysInYear[this.currentMonthNumber+1]){
-          this.onChangeMonthList.push(day)
-        }
-        this.onChangeActivityList = this.monthsActivities[this.currentMonthNumber] 
-        this.onChangeMonthList = []
-        for(let day of this.daysInYear[this.currentMonthNumber+1]){
-          this.onChangeMonthList.push(day)
-        }
-        
-        
-        this.closeAddActivityPanel()
+          for(let day of this.daysInYear[this.currentMonthNumber+1]){
+            this.onChangeMonthList.push(day)
+          }
+          this.onChangeActivityList = this.monthsActivities[this.currentMonthNumber] 
+          this.onChangeMonthList = []
+          for(let day of this.daysInYear[this.currentMonthNumber+1]){
+            this.onChangeMonthList.push(day)
+          }
+          
+          
+          this.closeAddActivityPanel()
 
-        this.loadingService.hide()
+          this.loadingService.hide()
+        })
+        
+        
       })
-      
-      
-    })
-
+    }
+    else{
+      flag = false;
+    }
     
 
   }

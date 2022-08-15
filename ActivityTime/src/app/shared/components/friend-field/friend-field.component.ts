@@ -34,7 +34,6 @@ export class FriendFieldComponent implements OnInit {
     this.loadingService.show()
     this.apiService.AddNotification(jsonData).subscribe(()=>{
       this.notificationSenderEmitter.emit("friend_request")
-      this.loadingService.hide()
     })
   }
 

@@ -1,6 +1,6 @@
 <div id="HomePageContainer">
     <div id="Title">ActivityTime</div>
-    <div class="activityManager">
+    <!-- <div class="activityManager">
         <div class="containerActivity">
             <div class="activityPublic">
                 <div class="titleContainer">
@@ -32,6 +32,9 @@
             <mat-icon (click)="OpenAddActivityPanel()" class="iconAddActivity">add_circle_outline</mat-icon>
         </div>
 
+    </div> -->
+    <div class="containerAddActivityButton">
+        <mat-icon (click)="OpenAddActivityPanel()" class="iconAddActivity">add_circle_outline</mat-icon>
     </div>
     <div id="UserDetails">
         <img id="UserImage" src="/assets/user-photo/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" alt="none">
@@ -52,7 +55,7 @@
 
     <div id="PanelMonthAct">
         <ng-container *ngFor="let item of onChangeMonthList">
-            <app-day-act [day]="item.toString()" [activityListInput]="monthsActivities[currentMonthNumber]" (emitter)="ActivityInfoTrigger($event)"></app-day-act>
+            <app-day-act [day]="item.toString()" [month]="currentMonthNumber+1" [activityListInput]="monthsActivities[currentMonthNumber]" (emitter)="ActivityInfoTrigger($event)"></app-day-act>
         </ng-container>
     </div>
     <router-outlet></router-outlet>
@@ -125,10 +128,10 @@
             <mat-icon (click)="closeAddActivityPanel()">cancel</mat-icon>
         </div>
         <div class="inputDataActiviy">
-            <app-text-filed-add-act-text id="newActivityTitle" [placeholder]="'Title'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityTitle" [placeholder]="'Title*'"></app-text-filed-add-act-text>
             <app-text-filed-add-act-text id="newActivityDescription" [placeholder]="'Description'"></app-text-filed-add-act-text>
-            <app-text-filed-add-act-text id="newActivityCity" [placeholder]="'City'"></app-text-filed-add-act-text>
-            <app-text-filed-add-act-text id="newActivityAddress" [placeholder]="'Address'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityCity" [placeholder]="'City*'"></app-text-filed-add-act-text>
+            <app-text-filed-add-act-text id="newActivityAddress" [placeholder]="'Address*'"></app-text-filed-add-act-text>
             <div id="dataPicker"> 
                 <span class="infoActivityRowTitle" style="margin-left: 0px;font-size: 16px;">Activity Type</span>
                 <mat-radio-group id="newActivityType"  (change)="OnTypeChange($event.value)">
@@ -141,7 +144,7 @@
             
             
             <div id="dataPicker"> 
-                <span class="infoActivityRowTitle" style="font-size: 16px;">Date</span>
+                <span id="titleDateNewActivity" class="infoActivityRowTitle" style="font-size: 16px;">Date*</span>
                 <mat-form-field color="accent" appearance="fill">
                     <mat-label>Date</mat-label>
                     <input #input matInput [matDatepicker]="picker1" (dateInput)="OnDateChange($event.value)">
@@ -150,10 +153,10 @@
                     <mat-datepicker #picker1 ></mat-datepicker>
                 </mat-form-field>
             </div>
-            <span class="infoActivityRowTitle" style="margin-left: -10px;font-size: 16px;">Time Start</span>
+            <span id="timeStartTitle" class="infoActivityRowTitle" style="margin-left: -10px;font-size: 16px;">Time Start*</span>
             <ngb-timepicker #timePicker1 [(ngModel)]="timeStartNewActivity"></ngb-timepicker>
 
-            <span class="infoActivityRowTitle" style="margin-left: -10px;font-size: 16px;">Time End</span>
+            <span id="timeEndTitle" class="infoActivityRowTitle" style="margin-left: -10px;font-size: 16px;">Time End*</span>
             <ngb-timepicker #timePicker2 [(ngModel)]="timeEndNewActivity"></ngb-timepicker>
 
            
@@ -164,6 +167,7 @@
                         <mat-checkbox #checkboxes style="margin-top: 4px; color:white" (change)="getUserInvite($event)" class="example-margin" value="{{friend.email}}" [disabled]="typeNewActivity != 'R' && typeNewActivity != 'P'">{{friend.name}} {{friend.surname}}</mat-checkbox>
                     </ng-container>
                 </section>
+                <span *ngIf="friendList.length == 0" class="infoActivityRowTitle" style="font-size: 12px;font-weight: normal;padding-top:10px ">Empty</span>
                 
             </div>    
             

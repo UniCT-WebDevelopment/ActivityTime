@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserFriend } from 'src/app/shared/models/user-friend.model';
 import { DataSessionService } from 'src/app/shared/services/data-session-service/data-session.service';
+import { LoadingService } from 'src/app/shared/services/loading-services/loading.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { DataSessionService } from 'src/app/shared/services/data-session-service
 export class FriendComponent implements OnInit {
   friendsList = []
   userFound = []
-  constructor(private dataSessionService : DataSessionService, private router : Router) { 
+  constructor(private dataSessionService : DataSessionService, private router : Router, private loadingService :LoadingService) { 
     if(!this.dataSessionService.getUser()){
       console.log("user not set")
       this.router.navigate(["/login"])
@@ -57,6 +58,7 @@ export class FriendComponent implements OnInit {
     console.log("è stata inviata una notifica")
     this.dataSessionService.DBfetchUserWithoutToken(this.dataSessionService.getUser().email,this.dataSessionService.getUser().password).then(()=>{
       this.searchBarResultTrigger(this.userFound)
+      this.loadingService.hide()
     })
 
   }

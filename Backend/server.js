@@ -15,10 +15,10 @@ server.use(express.json())
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
 var delay = async function (req, res, next) {
     console.log("delay start")
-    await pause(350)
+    await pause(70)
     next()    
 }
-//server.use(delay)
+server.use(delay)
 
 //router-registration
 const routerRegistration = require("./routers/registration-router")
@@ -35,6 +35,10 @@ server.use("/api",routerValidationToken)
 //router-data-user
 const routerDataUser= require("./routers/user-data.routes")
 server.use("/api",routerDataUser)
+
+//angular-application
+const routerAngularApplication= require("./resources-router")
+server.use("/",routerAngularApplication)
 
 
 server.listen(port, () => {

@@ -1,17 +1,17 @@
 <div>
-    <div class="phoneIcon" *ngIf="requestType == 'friend_request'">
-        <mat-icon class="iconNoOversize">group_add</mat-icon>
+    <div class="phoneIcon" style="height: 40px;" *ngIf="requestType == 'friend_request'">
+        <mat-icon style="padding-right: 10px; padding-bottom:10px" class="iconNoOversize">group_add</mat-icon>
     </div>
-    <div class="phoneIcon" *ngIf="requestType == 'invite_request'">
+    <div class="phoneIcon" *ngIf="requestType == 'invite_request' || requestType == 'join_request'">
         <mat-icon class="iconNoOversize">add_location</mat-icon>
     </div>
     <div id="icon1Desk" class="column" *ngIf="requestType == 'friend_request'">
         <mat-icon class="iconNoOversize">group_add</mat-icon>
     </div>
-    <div id="icon2Desk" class="column" *ngIf="requestType == 'invite_request'">
+    <div id="icon2Desk" class="column" *ngIf="requestType == 'invite_request' || requestType == 'join_request'">
         <mat-icon class="iconNoOversize">add_location</mat-icon>
     </div>
-    <div class="column">
+    <div class="column" id="firstRow">
         <span >Type</span>
         <span class="data">{{requestType}}</span>
     </div>
@@ -19,28 +19,27 @@
         <span>From</span>
         <span class="data">{{fromName}} {{fromSurname}}</span>
     </div>
-    <div class="column" style="width: 30%;" *ngIf="requestType == 'invite_request'">
+    <div class="column" style="width: 50%;" *ngIf="requestType == 'invite_request' || requestType == 'join_request' ">
         <span>ActivityTitle</span>
         <span class="data">{{activityTitle}}</span>
     </div>
-    <div class="column" *ngIf="requestType == 'invite_request'">
+    <div class="column" *ngIf="requestType == 'invite_request' || requestType == 'join_request'">
         <span>Date</span>
         <span class="data">{{activityDate.getDate()}}-{{activityDate.getMonth()+1}}-{{activityDate.getFullYear()}}</span>
     </div>
-    <div class="column" *ngIf="requestType == 'invite_request'">
+    <div class="column" *ngIf="requestType == 'invite_request' || requestType == 'join_request'">
         <span>Time</span>
         <span class="data">{{activityTimeStart}} - {{activityTimeEnd}}</span>
     </div>
-    <div class="phoneIcon2" (click)="AcceptRequest()">
-        <mat-icon style="margin-right: 50px;" class="icon" >check_circle</mat-icon>
+    <div class="phoneIcon2" >
+        <mat-icon (click)="AcceptRequest()" class="icon" >check_circle</mat-icon>
+        <mat-icon style="margin-left:30px" (click)="DenyRequest()" class="icon" >cancel</mat-icon>
     </div>
-    <div class="phoneIcon2"(click)="DenyRequest()">
-        <mat-icon class="icon" >cancel</mat-icon>
+
+    <div id="buttonAccept" class="column" style="margin-left: 100px;" (click)="AcceptRequest()">
+        <mat-icon class="icon">check_circle</mat-icon>
     </div>
-    <div class="column" style="margin-left: 100px;" (click)="AcceptRequest()">
-        <mat-icon class="icon" >check_circle</mat-icon>
-    </div>
-    <div class="column" (click)="DenyRequest()">
+    <div id="buttonDeny" class="column" (click)="DenyRequest()">
         <mat-icon class="icon" >cancel</mat-icon>
     </div>
     

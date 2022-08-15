@@ -1,0 +1,19 @@
+
+
+<div id="Title">ActivityZone</div>
+<div id="gridContainer">
+    <div id="searchBar">
+        <app-search-bar-activity-zone (searchResultEmitter)="searchBarResultTrigger($event)"></app-search-bar-activity-zone>
+    </div>
+    <div id="resultSearch">
+        <span style="padding-bottom: 20px;padding-left: 20px;">Activity</span>
+       <div class="container">
+            <ng-container *ngFor="let act of activityZone">
+                <app-activity-zone-field  (notificationSendEmitter)="notificationSendTrigger()" [idActivity]="act.ID" [activityTitle]="act.title" [activityCity]="act.city" [activityAddress]="act.address" [activityDate]="act.date" [activityTimeStart]="act.timeStart" [activityTimeEnd]="act.timeEnd" [activityFounderName]="act.founder.name" [activityFounderSurname]="act.founder.surname" [activityFounderEmail]="act.founder.email" [activityDescription]="act.description"></app-activity-zone-field>
+            </ng-container>
+        </div>
+    </div>    
+    
+</div>
+
+<app-side-menu></app-side-menu>

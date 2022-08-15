@@ -41,7 +41,12 @@ html, body { height: 100%; width: 100%; margin: 0; }
              0 0  0 2px rgb(255,255,255),
              0.3em 0.3em 1em rgba(0, 0, 0, 1);
 }
-
+#notificationsList::-webkit-scrollbar {
+    display: none;
+}
+.container::-webkit-scrollbar {
+    display: none;
+}
 app-search-bar{
     width: 50%;
 }
@@ -81,7 +86,7 @@ app-notification-field{
     }
     
     #containerMain{
-        margin-left: 50px;
+        margin-left: 4%;
         margin-right: 0%;     
         display: flex;
         height: 690px;
@@ -93,7 +98,7 @@ app-notification-field{
     #notificationsList{
         border: 3px solid cornflowerblue;
         height: 99%;
-        width: 100%;
+        width: 95%;
         display: flex;
         border-radius: 30px;
             margin-left: 2%;

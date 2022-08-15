@@ -1,9 +1,4 @@
-sistemare le validazioni
+1. Inserire bottone delle info che fa comparire un menu laterale che spiega tutto quello che c'è da sapere
 
-sistemare il CSS
+4. Testare
 
-sistemare gestione delle risposte del server
-
-sistemare la ricerca degli utenti aggiungendo anche l'email al LIKE
-
-Aggiungere l'activity Zone

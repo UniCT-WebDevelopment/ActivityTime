@@ -19,7 +19,7 @@ con.connect(function (err) {
 
 
 router.post("/activities", (req, res) => {
-    var query_getAllUserActivity = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM users JOIN usrXact ON users.email = usrXact.cod_usr JOIN Activities ON usrXact.cod_act = Activities.id WHERE usrXact.cod_usr = ? ORDER BY time_start";
+    var query_getAllUserActivity = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM users JOIN usrXact ON users.email = usrXact.cod_usr JOIN Activities ON usrXact.cod_act = Activities.id WHERE usrXact.cod_usr = ? ORDER BY time_start ASC";
     var x = 0;
     var activities = []
 
@@ -52,6 +52,7 @@ router.post("/activities", (req, res) => {
         if(x>0){res.send({ resp: { "activities": activities} });}
     });
 })
+
 
 router.post("/activitiesFounder", (req, res) => {
     var query_getAllUserActivityFounder = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM Activities WHERE cod_founder = ?  ORDER BY time_start";
@@ -241,15 +242,17 @@ router.post("/AddActivity", (req, res) => {
     console.log(req.body.codFounder)
     console.log(req.body.inviteFriend)
     
-    var values = [  
-        [req.body.title, req.body.description, req.body.date, req.body.timeStart,req.body.timeEnd,req.body.city,req.body.address,req.body.codFounder,req.body.type]
-    ];  
+    
     if (req.body.title == undefined || req.body.title == "" || req.body.date == undefined || req.body.date == "" || req.body.city == undefined || req.body.city == "" || req.body.address == undefined || req.body.address == "" || req.body.timeStart == undefined || req.body.timeStart == "" || req.body.codFounder == undefined || req.body.codFounder == "" || req.body.type == undefined || req.body.type == "" ) {
         res.send({ resp: "DENY" })
         return
     }
-    
-
+    let dateS = req.body.date + "T22:12:12.000Z"
+    let date = new Date(dateS)
+    console.log(date)
+    var values = [  
+        [req.body.title, req.body.description, req.body.date, req.body.timeStart,req.body.timeEnd,req.body.city,req.body.address,req.body.codFounder,req.body.type]
+    ];  
     
     con.query(query_AddNewActivity, [values], async function (err, result, fields) {
         if (err) {
@@ -284,7 +287,7 @@ router.post("/AddActivity", (req, res) => {
 })
 
 router.post("/userForFriend", (req, res) => {
-    var query_getAllUserForFriend= "SELECT name, surname, email, url_photo FROM users WHERE users.name LIKE ";
+    var query_getAllUserForFriend= "SELECT name, surname, email, url_photo FROM users WHERE ";
     var x = 0;
     var friend = []
 
@@ -293,8 +296,18 @@ router.post("/userForFriend", (req, res) => {
         res.send({ resp: "DENY" })
         return
     }
-
-    let stringLike = " '%"+req.body.searchString+"%' "+ " or users.surname LIKE "+" '%"+req.body.searchString+"%'";
+    let stringLikeSplitted = String(req.body.searchString).split(" ");
+    let stringLike = ""
+    console.log(stringLikeSplitted)
+    let y = stringLikeSplitted.length
+    for(let str of stringLikeSplitted){
+        stringLike += " users.name LIKE '%"+str+"%' "+ " or users.surname LIKE "+" '%"+str+"%'" + " or users.email LIKE "+" '%"+str+"%'";
+        if(y > 1){
+            stringLike += " or "
+            y--;
+        }
+    }
+   
     query_getAllUserForFriend += stringLike
     console.log(query_getAllUserForFriend)
     con.query(query_getAllUserForFriend, async function (err, result, fields) {
@@ -462,6 +475,45 @@ router.post("/deleteNotification", (req, res) => {
         res.send({"resp":"OK"})
     });
 })
+
+router.post("/allActivitiesForZone", (req, res) => {
+    var query_getAllActivityForZone = "SELECT id, title, description, date, time_start, time_end, city, address,cod_founder,type FROM Activities WHERE Activities.type = 'P' and Activities.date >= CURDATE() and Activities.city LIKE ";
+    var x = 0;
+    var activities = []
+
+    console.log("/api/allActivitiesForZone triggered");
+    if (req.body.searchString == undefined || req.body.searchString == "") {
+        res.send({ resp: "DENY" })
+        return
+    }
+    let stringLike = " '"+req.body.searchString+"%'";
+    let orderByCondition = " ORDER BY activities.date ASC, activities.time_start ASC, activities.title"
+    query_getAllActivityForZone += stringLike + orderByCondition;
+    console.log(query_getAllActivityForZone)
+    con.query(query_getAllActivityForZone, async function (err, result, fields) {
+        if (err) {
+            console.log(err)
+            res.send({ resp: "ERR" })
+            return
+        }
+        
+        while(result[x] != null) {
+
+            const activitiesFounderData = await getActivity(result[x].cod_founder)
+            const activitiesPartecipantsData = await getPartecipantsForActivity(result[x].id)
+            activities.push({"id":result[x].id,"title":result[x].title,"description":result[x].description,"date":result[x].date,"time_start":result[x].time_start,"time_end":result[x].time_end,"city":result[x].city,"address":result[x].address,"type":result[x].type,"founder":activitiesFounderData,"partecipants":activitiesPartecipantsData})
+            x = x+1
+            
+        }
+        if(x==0) {
+            res.send({ resp: "EMPTY" })
+            return
+        }  
+        
+        if(x>0){res.send({ resp: { "activities": activities} });}
+    });
+})
+
 
 
 

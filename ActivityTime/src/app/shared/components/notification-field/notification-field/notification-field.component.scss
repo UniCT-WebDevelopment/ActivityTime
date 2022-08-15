@@ -1,86 +1,10 @@
-div{
-    width: 101%;
-    position: relative;
-    display: inline-block;
-    flex-direction: column;
-    background-color: rgb(135, 171, 238);
-    justify-content: flex-start;
-    align-items: flex-start;
-    color: white;
-    border-radius: 30px;
-}
-
-.column{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width:100%;
-    font-size: 15px;
-    overflow: hidden;
-    padding-left: 25px;
-    margin-top: 5px;
-}
-
-.data{
-    margin-top: 3px;
-    font-weight: normal;
-}
-
-.iconNoOversize{
-    position: relative;
-    transform: scale(1.7);
-    z-index: 10;
-}
-
-.icon{
-    background-color: transparent;
-    position: absolute;
-    transform: scale(1.7);
-    z-index: 10;
-}
-.iconsContainer{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: 10%;
-    color: white;
-}
-.phoneIcon{
-    background-color: transparent;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    top: 30px;
-    width: 95%;
-    color: white;
-    z-index: 30;
-}
-
-.phoneIcon2{
-    background-color: transparent;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    bottom: 10px;
-    right: 20px;
-    width: 100%;
-    color: white;
-    z-index: 30;
-}
-
-
-#icon1Desk{
-    display: none;
-}
-
-#icon2Desk{
+div::-webkit-scrollbar {
     display: none;
 }
 
 
 
 
-//Desktop
 @media only screen and (min-width: 500px){
     .phoneIcon{
         display: none;
@@ -95,6 +19,7 @@ div{
     #icon2Desk{
         display: flex;
     }
+
     div{
         width: 101%;
         height: 65px;
@@ -112,7 +37,7 @@ div{
         display: flex;
         flex-direction: column;
         text-align: center;
-        width:25%;
+        width:30%;
         font-size: 15px;
         overflow: hidden;
     }
@@ -149,5 +74,230 @@ div{
     .icon:not(:hover){
         transform: scale(1.7);
         transition: transform 0.2s ease-in-out;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 917px){
+    div{
+        width: 101%;
+        height: auto;
+        position: relative;
+        display: inline-block;
+        flex-direction: column;
+        background-color: rgb(135, 171, 238);
+        justify-content: flex-start;
+        align-items: flex-start;
+        color: white;
+        overflow: hidden;
+        border-radius: 30px;
+    }
+    
+    
+    #firstRow{
+        padding-top: 0px;
+    }
+    .column{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width:100%;
+        height: 60px;
+        font-size: 15px;
+        overflow: scroll;
+        padding-left: 25px;
+        margin-top: -20px;
+        padding-bottom: 8px;
+    }
+    
+    
+    
+    .data{
+        margin-top: 3px;
+        font-weight: normal;
+    }
+    
+    .iconNoOversize{
+        position: relative;
+        transform: scale(1.5);
+        z-index: 10;
+        padding-top: 0px;
+    }
+    
+    .icon{
+        background-color: transparent;
+        position: relative;
+        transform: scale(1.7);
+        z-index: 10;
+        padding-top: 10px;
+    }
+    .iconsContainer{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 10%;
+        color: white;
+    }
+    
+    .phoneIcon{
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        top: 30px;
+        height: 35px;
+        width: 90%;
+        color: white;
+        z-index: 30;
+    }
+    
+    .phoneIcon2{
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding-bottom: 30px;
+        width: 100%;
+        color: white;
+        z-index: 30;
+    }
+    
+    
+    #icon1Desk{
+        padding-left: 0px;
+        display: none;
+    }
+    
+    #icon2Desk{
+        display: none;
+    }
+    
+    #buttonAccept{
+        display: none;
+        padding-bottom: 0px;
+        padding-left: 0px;
+    }
+    
+    #buttonDeny{
+        display: none;
+        bottom: 0px;
+    }
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 499px){
+    div{
+        width: 101%;
+        height: auto;
+        position: relative;
+        display: inline-block;
+        flex-direction: column;
+        background-color: rgb(135, 171, 238);
+        justify-content: flex-start;
+        align-items: flex-start;
+        color: white;
+        overflow: hidden;
+        border-radius: 30px;
+    }
+    
+    
+    #firstRow{
+        padding-top: 0px;
+    }
+    .column{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width:100%;
+        height: 60px;
+        font-size: 15px;
+        overflow: scroll;
+        padding-left: 25px;
+        margin-top: -20px;
+        padding-bottom: 8px;
+    }
+    
+    
+    
+    .data{
+        margin-top: 3px;
+        font-weight: normal;
+    }
+    
+    .iconNoOversize{
+        position: relative;
+        transform: scale(1.5);
+        z-index: 10;
+        padding-top: 0px;
+    }
+    
+    .icon{
+        background-color: transparent;
+        position: relative;
+        transform: scale(1.7);
+        z-index: 10;
+        padding-top: 10px;
+    }
+    .iconsContainer{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 10%;
+        color: white;
+    }
+    
+    .phoneIcon{
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        top: 30px;
+        height: 35px;
+        width: 90%;
+        color: white;
+        z-index: 30;
+    }
+    
+    .phoneIcon2{
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding-bottom: 30px;
+        width: 100%;
+        color: white;
+        z-index: 30;
+    }
+    
+    
+    #icon1Desk{
+        padding-left: 0px;
+        display: none;
+    }
+    
+    #icon2Desk{
+        display: none;
+    }
+    
+    #buttonAccept{
+        display: none;
+        padding-bottom: 0px;
+        padding-left: 0px;
+    }
+    
+    #buttonDeny{
+        display: none;
+        bottom: 0px;
     }
 }

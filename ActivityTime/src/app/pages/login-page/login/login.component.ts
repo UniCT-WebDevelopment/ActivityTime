@@ -83,12 +83,18 @@ export class LoginComponent implements OnInit {
       var email: string = this.emailHTML.getElementsByTagName("input")[0].value.toString();
       var psw: string = this.passwordHTML.getElementsByTagName("input")[0].value.toString();
       var usr : User;
+      var containerEmail: Element = this.emailHTML.getElementsByTagName("div")[0];
+      var containerPassword: Element = this.passwordHTML.getElementsByTagName("div")[0];
       //Call API for Login user
       try{
+        containerEmail.className = "valid"
+        containerPassword.className = "valid"
         await this.dataSession.DBfetchUserWithoutToken(email.toLowerCase(),psw)
         this.router.navigate(["/home"])
       }
       catch(err){
+        containerEmail.className = "invalid"
+        containerPassword.className = "invalid"
         console.log("problem")
       }
       

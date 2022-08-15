@@ -6,8 +6,8 @@ import { User } from '../../models/user.model';
  
 @Injectable({providedIn:'root'})
 export class ApiService {
-  baseURL: string = "http://192.168.1.8:9000/";
-  baseApiURL: string = "http://192.168.1.8:9000/api/";
+  baseURL: string = "http://192.168.1.2:9000/";
+  baseApiURL: string = "http://192.168.1.2:9000/api/";
  
   constructor(private http: HttpClient) {
   }
@@ -113,5 +113,9 @@ export class ApiService {
     return this.http.post(this.baseApiURL + 'deleteNotification', {"id":id}, {'headers':headers})
   }
   
+  GetActivityForZone(data:String): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    return this.http.post(this.baseApiURL + 'allActivitiesForZone', {searchString:data}, {'headers':headers})
+  }
  
 }

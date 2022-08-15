@@ -46,6 +46,14 @@ export class RegisterComponent implements OnInit {
       data.set("surname",surname)
       data.set("email",email.toLowerCase())
       data.set("password",psw)
+      var containerName : Element = this.nameHTML.getElementsByTagName("div")[0];
+      var containerSurname : Element = this.surnameHTML.getElementsByTagName("div")[0];
+      var containerEmail : Element = this.emailHTML.getElementsByTagName("div")[0];
+      var containerPassword : Element = this.passwordHTML.getElementsByTagName("div")[0];
+      containerName.className = "valid"
+      containerSurname.className = "valid"
+      containerEmail.className = "valid"
+      containerPassword.className = "valid"
       this.loadingService.show()
       this.apiService.RegistrationAPI(data)
       .pipe(
@@ -56,6 +64,10 @@ export class RegisterComponent implements OnInit {
           //Redirect To Login
           this.loadingService.hide()
           this.router.navigate(["/login"])
+        }
+        else{
+        containerEmail.className = "invalid"
+        this.loadingService.hide()
         }
       })
       

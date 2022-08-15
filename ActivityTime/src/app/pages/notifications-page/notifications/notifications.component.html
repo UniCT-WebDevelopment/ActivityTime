@@ -2,12 +2,16 @@
 <div id="containerMain">
     <div id="notificationsList">
         <div class="container">
-            <span style="padding-bottom: 10px;padding-left: 20px;margin-top: 20px;">Friend Request</span>
+            <span style="padding-bottom: 10px;padding-left: 20px;margin-top: 20px;">Friendship Requests</span>
             <ng-container *ngFor="let notification of friendNotificationsList">
                 <app-notification-field (notificationAcceptEmitter)="notificationAcceptTrigger($event)" [idNotification]="notification.ID" [requestType]="notification.type" [fromEmail]="notification.cod_sender" [fromName]="notification.name_sender" [fromSurname]="notification.surname_sender" [activityTitle]="notification.activity_title" [idActivity]="notification.cod_activity"></app-notification-field>
             </ng-container>
-            <span style="padding-bottom: 10px;padding-left: 20px;margin-top: 20px;">Activity Request</span>
+            <span style="padding-bottom: 10px;padding-left: 20px;margin-top: 20px;">Invitations To Activities</span>
             <ng-container *ngFor="let notification of activityNotificationsList">
+                <app-notification-field (notificationAcceptEmitter)="notificationAcceptTrigger($event)" [idNotification]="notification.ID" [requestType]="notification.type" [fromEmail]="notification.cod_sender" [fromName]="notification.name_sender" [fromSurname]="notification.surname_sender" [activityTitle]="notification.activity_title" [idActivity]="notification.cod_activity" [activityDate]="notification.date" [activityTimeStart]="notification.time_start" [activityTimeEnd]="notification.time_end" ></app-notification-field>
+            </ng-container>
+            <span style="padding-bottom: 10px;padding-left: 20px;margin-top: 20px;">Participation Requests</span>
+            <ng-container *ngFor="let notification of activityJoinNotificationsList">
                 <app-notification-field (notificationAcceptEmitter)="notificationAcceptTrigger($event)" [idNotification]="notification.ID" [requestType]="notification.type" [fromEmail]="notification.cod_sender" [fromName]="notification.name_sender" [fromSurname]="notification.surname_sender" [activityTitle]="notification.activity_title" [idActivity]="notification.cod_activity" [activityDate]="notification.date" [activityTimeStart]="notification.time_start" [activityTimeEnd]="notification.time_end" ></app-notification-field>
             </ng-container>
         </div>

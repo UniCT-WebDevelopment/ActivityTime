@@ -39,7 +39,7 @@ export class NotificationFieldComponent implements OnInit {
       this.apiService.AddFriend(jsonData).subscribe(()=>{
         this.apiService.DeleteNotification(this.idNotification).subscribe(()=>{
           this.notificationAcceptEmitter.emit("friend_request")
-          this.loadingService.hide()
+          
         })
       })
     }
@@ -51,7 +51,19 @@ export class NotificationFieldComponent implements OnInit {
       this.apiService.AddActivityPartecipant(jsonData).subscribe(()=>{
         this.apiService.DeleteNotification(this.idNotification).subscribe(()=>{
           this.notificationAcceptEmitter.emit("invite_request")
-          this.loadingService.hide()
+          
+        })
+      })
+    }
+    else if(this.requestType== "join_request"){
+      jsonData.set("cod_usr",this.fromEmail)
+      jsonData.set("cod_act",this.idActivity)
+      jsonData.set("status","N")
+      this.loadingService.show()
+      this.apiService.AddActivityPartecipant(jsonData).subscribe(()=>{
+        this.apiService.DeleteNotification(this.idNotification).subscribe(()=>{
+          this.notificationAcceptEmitter.emit("join_request")
+          
         })
       })
     }
@@ -62,14 +74,21 @@ export class NotificationFieldComponent implements OnInit {
       this.loadingService.show()
       this.apiService.DeleteNotification(this.idNotification).subscribe(()=>{
         this.notificationAcceptEmitter.emit("friend_request")
-        this.loadingService.hide()
+        
       })
     }
     else if(this.requestType== "invite_request"){
       this.loadingService.show()
       this.apiService.DeleteNotification(this.idNotification).subscribe(()=>{
         this.notificationAcceptEmitter.emit("invite_request")
-        this.loadingService.hide()
+        
+      })
+    }
+    else if(this.requestType== "join_request"){
+      this.loadingService.show()
+      this.apiService.DeleteNotification(this.idNotification).subscribe(()=>{
+        this.notificationAcceptEmitter.emit("join_request")
+        
       })
     }
   }

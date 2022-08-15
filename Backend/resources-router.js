@@ -5,4 +5,4 @@ router.get("*", (req,res) => {
     res.sendFile("/Users/alessio/Documents/ProgettoWeb/ActivityTime/Backend/activity-time/index.html");
 });
 
-
+module.exports = router;
