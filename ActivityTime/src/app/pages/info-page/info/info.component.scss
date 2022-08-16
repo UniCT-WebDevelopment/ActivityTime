@@ -1,0 +1,252 @@
+html, body { height: 100%; width: 100%; margin: 0; }
+
+
+#AnswerPanel{
+    word-wrap: break-word;
+    display: flex;
+    flex-direction:column;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 320px;
+    background-color: cornflowerblue;
+    overflow-y: scroll;
+    z-index: 30;
+}
+#Title{
+    position: relative;
+    color: cornflowerblue;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 40px;
+    padding-left: 80px;
+    font-size: 40px;
+    font-weight: bold;
+    padding-top: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.question{
+    z-index: 14;
+    height: 30px;
+    position: relative;
+    color: cornflowerblue;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.question:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.answer{
+    padding-top: 20px;
+    height: 30px;
+    padding-left: 5px;
+    width: 90%;
+    position: relative;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#containerMain{
+    margin-left: 6%;
+    margin-right: 0%;     
+    display: flex;
+    height: 690px;
+    width: 96%;
+    overflow: scroll;
+    flex-direction: column;
+}
+
+#containerMain div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#containerMain::-webkit-scrollbar {
+    display: none;
+}
+
+#AnswerPanel::-webkit-scrollbar {
+    display: none;
+}
+
+.AnswerPanelShow{
+    opacity: 1;
+    transform: translateX(0px);
+    transition: transform 0.6s ease-in-out;
+    transform-origin: right;
+    cursor: pointer;
+}
+
+.AnswerPanelNotShow{
+    transform: translateX(600px);
+    cursor: pointer;
+    transform-origin: right;
+    transition: transform 0.6s ease-in-out;
+    z-index: 0;
+}
+
+#infoContainer{
+    position: relative;
+    left: -20px;
+    width: 100%;
+    margin-top: 18px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    transform: translateX(29px);
+    padding-left: 10px;
+    color: white;
+}
+
+.exitActivityInfoIcon{
+    padding-left: 120px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 30px;
+    position: relative;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+
+@media only screen and (min-width: 500px){
+    #Title{
+        position: relative;
+        color: cornflowerblue;
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        padding-bottom: 40px;
+        padding-left: 80px;
+        font-size: 40px;
+        font-weight: bold;
+        padding-top: 30px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .question{
+        height: 30px;
+        position: relative;
+        color: cornflowerblue;
+        font-size: 20px;
+        font-weight: bold;
+        padding-top: 10px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .question:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .answer{
+        padding-top: 30px;
+        height: 30px;
+        padding-left: 18px;
+        padding-right: 10px;
+        width: 90%;
+        position: relative;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    
+    #containerMain{
+        margin-left: 6%;
+        margin-right: 0%;     
+        display: flex;
+        height: 690px;
+        width: 96%;
+        overflow: scroll;
+        flex-direction: column;
+    }
+
+    #containerMain div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    #containerMain::-webkit-scrollbar {
+        display: none;
+    }
+
+    #AnswerPanel{
+        word-wrap: break-word;
+        display: flex;
+        flex-direction:column;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        height: 100%;
+        width: 600px;
+        background-color: cornflowerblue;
+        overflow-y: scroll;
+    }
+    #AnswerPanel::-webkit-scrollbar {
+        display: none;
+    }
+
+    .AnswerPanelShow{
+        opacity: 1;
+        transform: translateX(0px);
+        transition: transform 0.6s ease-in-out;
+        transform-origin: right;
+        cursor: pointer;
+    }
+
+    .AnswerPanelNotShow{
+        transform: translateX(600px);
+        cursor: pointer;
+        transform-origin: right;
+        transition: transform 0.6s ease-in-out;
+        z-index: 0;
+    }
+
+    #infoContainer{
+        position: relative;
+        left: -20px;
+        width: 100%;
+        margin-top: 18px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        transform: translateX(29px);
+        padding-left: 10px;
+        color: white;
+    }
+   
+    .exitActivityInfoIcon{
+        padding-left: 200px;
+        display: flex;
+        width: 90%;
+        align-items: center;
+        justify-content: flex-start;
+        height: 30px;
+        position: relative;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+}
+    
+

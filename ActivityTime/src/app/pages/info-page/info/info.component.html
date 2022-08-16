@@ -1,0 +1,24 @@
+<div id="Title">Info</div>
+
+<div id="containerMain">
+    <div (click)="AnswerQ1()" class="question">(1) Home Page <mat-icon style="padding-left: 10px;">home</mat-icon></div>
+    <div (click)="AnswerQ2()" class="question">(2) ActivityZone <mat-icon style="padding-left: 10px;">place</mat-icon></div>
+    <div (click)="AnswerQ3()" class="question">(3) Discovery Friends <mat-icon style="padding-left: 10px;">supervisor_account</mat-icon></div>
+    <div (click)="AnswerQ4()" class="question">(4) Notifications Area <mat-icon style="padding-left: 10px;">notifications_active</mat-icon></div>
+    <div (click)="AnswerQ5()" class="question">(5) Add New Activity <mat-icon style="padding-left: 10px;">add_circle_outline</mat-icon></div>
+    
+</div>
+
+<div *ngIf="!hideComponentOverflow2" id="AnswerPanel" [ngClass]="showAnswerPanel ? 'AnswerPanelShow' : 'AnswerPanelNotShow'">
+    <div id="infoContainer">
+        <div class="exitActivityInfoIcon">
+            <mat-icon (click)="closeAnswerPanel()">cancel</mat-icon>
+            <div style="padding-left: 8px;">{{questionText}}</div>
+        </div>
+        <div class="answer">{{answerText}}</div>
+
+    </div>
+</div>
+
+
+<app-side-menu (menuNavigateEmitter)="menuNavigate2($event)" ></app-side-menu>

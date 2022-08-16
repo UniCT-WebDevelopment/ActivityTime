@@ -36,7 +36,7 @@ html, body { height: 100%; width: 100%; margin: 0; }
             margin-left: 2%;
         margin-right: 2%;
             display: flex;
-            overflow:scroll;
+            overflow:hidden;
             flex-wrap: wrap;
             justify-content: center;
             
@@ -170,7 +170,7 @@ html, body { height: 100%; width: 100%; margin: 0; }
         margin-left: 2%;
         margin-right: 2%;
         display: flex;
-        overflow:scroll;
+        overflow:hidden;
         flex-wrap: wrap;
         justify-content: center;
             
@@ -246,5 +246,9 @@ html, body { height: 100%; width: 100%; margin: 0; }
     display: none;
 }
 .container::-webkit-scrollbar {
+    display: none;
+}
+
+#searchBar::-webkit-scrollbar {
     display: none;
 }

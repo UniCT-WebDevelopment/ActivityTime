@@ -120,7 +120,7 @@ app-friend-field{
             margin-left: 2%;
         margin-right: 2%;
             display: flex;
-            overflow:scroll;
+            overflow:hidden;
             flex-wrap: wrap;
             justify-content: center;
             
@@ -175,13 +175,6 @@ app-friend-field{
 }
 
 
-
-
-
-
-.container::-webkit-scrollbar {
-    display: none;
-}
 #resultSearch::-webkit-scrollbar {
     display: none;
 }

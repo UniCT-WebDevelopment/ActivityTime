@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import("./pages/activity-zone/activity-zone.module").then((module) => module.ActivityZoneModule)
   },
   {
+    path: "info",
+    loadChildren: () => import("./pages/info-page/info-page.module").then((module) => module.InfoPageModule)
+  },
+  {
     path: "**",
     loadChildren: () => import("./pages/login-page/login-page.module").then((module) => module.LoginPageModule)
   },

@@ -42,5 +42,5 @@ server.use("/",routerAngularApplication)
 
 
 server.listen(port, () => {
-    console.log("server listen on port "+ port + "...")
+    console.log("ActivityTimeApp is now running on port: "+ port + "...")
 });

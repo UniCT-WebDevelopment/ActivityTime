@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   timeEndNewActivity = {hour: '', minute: ''};
   dateNewActivity = ""
   typeNewActivity = "PR"
-  hideComponentOverflow = false
+  hideComponentOverflow = true
   @ViewChild('input', { read: MatInput}) matInput: MatInput;
   @ViewChild('timePicker1', { read: NgbTimepicker}) timePicker1: NgbTimepicker;
   @ViewChild('timePicker2', { read: NgbTimepicker}) timePicker2: NgbTimepicker;
@@ -195,25 +195,32 @@ export class HomeComponent implements OnInit {
     
   }
 
-  ActivityInfoTrigger(activity : Activities){
+  async ActivityInfoTrigger(activity : Activities){
     //Keep attention, it's reference not original
-    this.showActivityInfo=true
     this.activityDataModel = activity
     this.activityUserListModel = []
     for(let user of activity.participants){
       this.activityUserListModel.push(user)
     }
+    this.hideComponentOverflow = false
+    await new Promise(f => setTimeout(f, 100));
+    this.showActivityInfo=true
   }
-  closeActivityInfoPanel(){
-    this.showActivityInfo=false
+  async closeActivityInfoPanel(){
+    this.showActivityInfo = false
+    await new Promise(f => setTimeout(f, 500));
+    this.hideComponentOverflow = true
   }
 
-  OpenAddActivityPanel(){
-    this.showAddActivity = true
-    
-    
+  async OpenAddActivityPanel(){
+    this.hideComponentOverflow = false
+    await new Promise(f => setTimeout(f, 100));
+    this.showAddActivity=true
   }
-  closeAddActivityPanel(){
+
+
+ 
+  async closeAddActivityPanel(){
     document.getElementById("newActivityTitle").getElementsByTagName("div")[0].className = "valid"
     document.getElementById("newActivityDescription").getElementsByTagName("div")[0].className = "valid"
     document.getElementById("newActivityCity").getElementsByTagName("div")[0].className = "valid"
@@ -226,20 +233,31 @@ export class HomeComponent implements OnInit {
     document.getElementById("newActivityCity").getElementsByTagName("input")[0].value = ""
     document.getElementById("newActivityAddress").getElementsByTagName("input")[0].value = ""
     this.typeNewActivity = "PR"
+    this.dateNewActivity = ""
     this.matInput.value = '';
+    console.log(this.timePicker1)
     this.timePicker1.writeValue('')
     this.timePicker2.writeValue('')
     this.uncheckAll()
     this.userToInvite = []
+    
     this.showAddActivity = false
+    await new Promise(f => setTimeout(f, 500));
     
   }
-  OnDateChange(date : Date): void {
-    console.log(date)
-    let day = date.getDate()
-    let month = date.getMonth() +1
-    let year = date.getFullYear()
-    this.dateNewActivity = year + "-" +  month + "-" +day;
+  OnDateChange(date : Date): void {  
+    if(!date || date.toString() == "" || !date.getDate()){
+      this.dateNewActivity = ""
+      console.log("DATA ERRATA")
+    }
+    else{
+      let day = date.getDate()
+      let month = date.getMonth() +1
+      let year = date.getFullYear()
+      this.dateNewActivity = year + "-" +  month + "-" +day;
+      console.log("DATA SETTATA: " + this.dateNewActivity)
+    }
+    
   }
 
   OnTypeChange(type ): void {
@@ -247,7 +265,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  async AddNewActivity(){
+  AddNewActivity(){
     let flag = false;
     let title = document.getElementById("newActivityTitle").getElementsByTagName("input")[0].value.toString();
     let description = document.getElementById("newActivityDescription").getElementsByTagName("input")[0].value.toString();
@@ -358,6 +376,7 @@ export class HomeComponent implements OnInit {
         flag = true
       }
     }
+
     if(flag == false){
 
     
@@ -420,10 +439,8 @@ export class HomeComponent implements OnInit {
           for(let day of this.daysInYear[this.currentMonthNumber+1]){
             this.onChangeMonthList.push(day)
           }
-          
-          
-          this.closeAddActivityPanel()
 
+          this.closeAddActivityPanel()
           this.loadingService.hide()
         })
         

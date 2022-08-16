@@ -13,7 +13,6 @@ export class ActivityZoneComponent implements OnInit {
   activityZone : Activities[] = []
   constructor(private dataSessionService: DataSessionService,private router : Router,private loadingService : LoadingService) {
     if(!this.dataSessionService.getUser()){
-      console.log("user not set")
       this.router.navigate(["/login"])
     }
     else{

@@ -1,4 +1,0 @@
-1. Inserire bottone delle info che fa comparire un menu laterale che spiega tutto quello che c'è da sapere
-
-4. Testare
-

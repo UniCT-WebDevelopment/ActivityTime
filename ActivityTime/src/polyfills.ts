@@ -55,3 +55,7 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+
+window.console.log = function(){}
+window.console.error = function(){}
