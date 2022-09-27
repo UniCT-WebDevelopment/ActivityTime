@@ -48,6 +48,8 @@ export class HomeComponent implements OnInit {
   @ViewChild('timePicker1', { read: NgbTimepicker}) timePicker1: NgbTimepicker;
   @ViewChild('timePicker2', { read: NgbTimepicker}) timePicker2: NgbTimepicker;
   @ViewChildren("checkboxes", { read: MatCheckbox}) checkboxes: QueryList<any>;
+  address : string;
+  city : string;
   
 
   constructor(private apiService : ApiService,private router : Router,private dataSessionService : DataSessionService, private loadingService : LoadingService) {
@@ -197,13 +199,38 @@ export class HomeComponent implements OnInit {
 
   async ActivityInfoTrigger(activity : Activities){
     //Keep attention, it's reference not original
-    this.activityDataModel = activity
-    this.activityUserListModel = []
-    for(let user of activity.participants){
-      this.activityUserListModel.push(user)
+    
+    
+    if(this.showActivityInfo == true){
+
+      this.showActivityInfo = false
+      await new Promise(f => setTimeout(f, 500));
+      this.activityDataModel = activity
+      this.activityUserListModel = []
+      for(let user of activity.participants){
+        this.activityUserListModel.push(user)
+      }
+      
+      this.address = activity.address.toString();
+      this.city = activity.city.toString();
+      this.hideComponentOverflow = true
+      await new Promise(f => setTimeout(f, 100));
+      this.hideComponentOverflow = false
+      await new Promise(f => setTimeout(f, 100));
     }
-    this.hideComponentOverflow = false
-    await new Promise(f => setTimeout(f, 100));
+
+    else{
+      this.activityDataModel = activity
+      this.activityUserListModel = []
+      for(let user of activity.participants){
+        this.activityUserListModel.push(user)
+      }
+      this.city = activity.city.toString();
+      this.address = activity.address.toString();
+      this.hideComponentOverflow = false
+      await new Promise(f => setTimeout(f, 100));
+    }
+    
     this.showActivityInfo=true
   }
   async closeActivityInfoPanel(){

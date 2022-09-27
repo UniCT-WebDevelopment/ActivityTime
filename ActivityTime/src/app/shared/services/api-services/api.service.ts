@@ -6,8 +6,11 @@ import { User } from '../../models/user.model';
  
 @Injectable({providedIn:'root'})
 export class ApiService {
-  baseURL: string = "http://192.168.1.12:9000/";
-  baseApiURL: string = "http://192.168.1.12:9000/api/";
+  //baseURL: string = "http://192.168.1.12:9000/";
+  //baseApiURL: string = "http://192.168.1.12:9000/api/";
+  
+  baseURL: string = window.location.origin+"/";
+  baseApiURL: string = window.location.origin+"/api/";
  
   constructor(private http: HttpClient) {
   }
@@ -116,6 +119,13 @@ export class ApiService {
   GetActivityForZone(data:String): Observable<any> {
     const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
     return this.http.post(this.baseApiURL + 'allActivitiesForZone', {searchString:data}, {'headers':headers})
+  }
+
+  GetLatLonFromAddress(address:string,city:string): Observable<any> {
+    const headers = { 'Content-Type' : 'application/json; charset=UTF-8'} 
+    console.log(this.baseApiURL);
+    console.log(window.location.origin);
+    return this.http.get("https://nominatim.openstreetmap.org/search?format=json&limit=50&q="+address + " " + city, {'headers':headers})
   }
  
 }

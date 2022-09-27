@@ -369,6 +369,14 @@ export class DataSessionService {
     
   }
 
+  async GetLatLonFromAddress(address:string,city:string):Promise<any>{
+    return await new Promise((resolve,reject) => {
+      this.apiService.GetLatLonFromAddress(address,city).subscribe((data)=>{
+        resolve(data);
+      })
+    });
+  }
+
   
 
   

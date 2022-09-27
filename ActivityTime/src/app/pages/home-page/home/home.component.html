@@ -73,7 +73,7 @@
             <span class="infoActivityRowTitle">Title</span>
             <div class="infoActivityRowData">{{activityDataModel.title + "  (" + activityDataModel.type + ")" }}</div>
         </div>
-        <div class="infoActivityRow">
+        <div class="infoActivityRow" *ngIf="activityDataModel.description.length > 0">
             <span class="infoActivityRowTitle">Description</span>
             <div class="infoActivityRowData">{{activityDataModel.description}}</div>
         </div>
@@ -85,7 +85,11 @@
         <div class="infoActivityRow">
             <span class="infoActivityRowTitle">Address</span>
             <div class="infoActivityRowData">{{activityDataModel.address}}</div>
+            <div class="infoActivityRowData"><app-map [address]="address" [city]="city"></app-map></div>
+            
         </div>
+
+        
         <div class="infoActivityRow">
             <span class="infoActivityRowTitle">Date</span>
             <div class="infoActivityRowData">{{activityDataModel.date.getDate() + "-" +(activityDataModel.date.getMonth()+1) + "-"+ activityDataModel.date.getFullYear()}}</div>
@@ -104,7 +108,7 @@
         </div>
         
 
-        <div class="infoActivityRow">
+        <div class="infoActivityRow" *ngIf="activityUserListModel.length > 0">
             <span class="infoActivityRowTitle">Partecipants List</span>
             <div *ngFor="let data of activityUserListModel">
                 <br>
@@ -160,14 +164,17 @@
             <ngb-timepicker #timePicker2 [(ngModel)]="timeEndNewActivity"></ngb-timepicker>
 
            
-            <div id="dataPicker" style="margin-top: 0px;"> 
-                <span class="infoActivityRowTitle" style="font-size: 16px;">Add Friend</span>
-                <section class="example-section" style="display: flex; flex-direction:column">
-                    <ng-container *ngFor="let friend of friendList">
-                        <mat-checkbox #checkboxes style="margin-top: 4px; color:white" (change)="getUserInvite($event)" class="example-margin" value="{{friend.email}}" [disabled]="typeNewActivity != 'R' && typeNewActivity != 'P'">{{friend.name}} {{friend.surname}}</mat-checkbox>
-                    </ng-container>
-                </section>
-                <span *ngIf="friendList.length == 0" class="infoActivityRowTitle" style="font-size: 12px;font-weight: normal;padding-top:10px ">Empty</span>
+            <div id="dataPicker" style="margin-top: 0px;" *ngIf="friendList.length > 0"> 
+                <span class="infoActivityRowTitle" style="font-size: 16px; padding-bottom:15px">Add Friend</span>
+                <div class="container-friend-list">
+                    <section class="example-section" style="display: flex; flex-direction:column;">
+                        <ng-container *ngFor="let friend of friendList">
+                            <mat-checkbox #checkboxes style="margin-top: 4px; color:white" (change)="getUserInvite($event)" class="example-margin" value="{{friend.email}}" [disabled]="typeNewActivity != 'R' && typeNewActivity != 'P'">{{friend.name}} {{friend.surname}}</mat-checkbox>
+                        </ng-container>
+                    </section>
+                </div>
+                
+                
                 
             </div>    
             

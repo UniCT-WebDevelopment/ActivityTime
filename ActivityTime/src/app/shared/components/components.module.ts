@@ -26,6 +26,7 @@ import { FriendFieldComponent } from './friend-field/friend-field.component';
 import { NotificationFieldComponent } from './notification-field/notification-field/notification-field.component';
 import { SearchBarActivityZoneComponent } from './search-bar-activity-zone/search-bar-activity-zone/search-bar-activity-zone.component';
 import { ActivityZoneFieldComponent } from './activity-zone-field/activity-zone-field/activity-zone-field.component';
+import { MapComponent } from './map/map.component';
 
 
 
@@ -36,7 +37,7 @@ import { ActivityZoneFieldComponent } from './activity-zone-field/activity-zone-
 
 @NgModule({
   declarations: [
-  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent, ActivityComponent, SideMenuComponent, TextFiledAddActTextComponent, SearchBarComponent, FriendFieldComponent, NotificationFieldComponent, SearchBarActivityZoneComponent, ActivityZoneFieldComponent, 
+  TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent, CustomButtonComponent, SpinnerComponent, DayActComponent, ActivityComponent, SideMenuComponent, TextFiledAddActTextComponent, SearchBarComponent, FriendFieldComponent, NotificationFieldComponent, SearchBarActivityZoneComponent, ActivityZoneFieldComponent, MapComponent, 
   ],
   imports: [
     CommonModule, 
@@ -47,7 +48,7 @@ import { ActivityZoneFieldComponent } from './activity-zone-field/activity-zone-
     MatIconModule
   ],
   exports:[
-    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent,ActivityComponent,SideMenuComponent, TextFiledAddActTextComponent, SearchBarComponent, FriendFieldComponent, NotificationFieldComponent, SearchBarActivityZoneComponent, ActivityZoneFieldComponent
+    TextfieldEmailComponent,TextfieldNumComponent,TextfieldNumDComponent,TextfieldPswComponent,TextfieldTextComponent,CustomButtonComponent,SpinnerComponent,DayActComponent,ActivityComponent,SideMenuComponent, TextFiledAddActTextComponent, SearchBarComponent, FriendFieldComponent, NotificationFieldComponent, SearchBarActivityZoneComponent, ActivityZoneFieldComponent, MapComponent
   ]
 })
 export class SharedComponentsModule {}

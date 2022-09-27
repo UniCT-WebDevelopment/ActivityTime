@@ -2,7 +2,7 @@ const port = 9000;
 const { application } = require("express");
 const express = require("express");
 const server = express();
-server.use(express.static("/Users/alessio/Documents/ProgettoWeb/ActivityTime/Backend/activity-time"));
+server.use(express.static("./activity-time"));
 server.set('view engine','pug')
 server.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin','*') 
@@ -36,9 +36,9 @@ server.use("/api",routerValidationToken)
 const routerDataUser= require("./routers/user-data.routes")
 server.use("/api",routerDataUser)
 
-//angular-application
+//router-angular-application
 const routerAngularApplication= require("./resources-router")
-server.use("/",routerAngularApplication)
+//server.use("/",routerAngularApplication)
 
 
 server.listen(port, () => {
